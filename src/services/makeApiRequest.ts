@@ -1,9 +1,10 @@
 import axios, { AxiosError } from "axios";
+import { baseDomain } from "../config/apiConfig";
 
 type THTTPMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
 const apiCLient = axios.create({
-    baseURL: 'https://jsonplaceholder.typicode.com'
+    baseURL: baseDomain
 });
 
 class ApiError extends Error {
