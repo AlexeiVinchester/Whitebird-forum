@@ -1,20 +1,13 @@
 import axios, { AxiosError } from "axios";
-import { baseDomain } from "../config/apiConfig";
-
-type THTTPMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+import { baseDomain } from "../config/config";
+import { THTTPMethods } from "../types/httpMethods.type";
+import { ApiError } from "./errors/apiError";
 
 const apiCLient = axios.create({
     baseURL: baseDomain
 });
 
-class ApiError extends Error {
-    constructor(public message: string, public httpStatus: number) {
-        super(message);
-        this.httpStatus = httpStatus;
-    }
-};
-
-export const makeApiRequest = async <T = undefined>(url: string, method: THTTPMethod, body?: T) => {
+export const makeApiRequest = async <T = undefined>(url: string, method: THTTPMethods, body?: T) => {
     try {
         const response = await apiCLient({
             method,

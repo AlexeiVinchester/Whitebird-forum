@@ -1,4 +1,4 @@
-import { apiEndpoints } from "../../config/apiConfig";
+import { apiEndpoints } from "../../services/apiEndpoints";
 import { makeApiRequest } from "../../services/makeApiRequest";
 import { IApiUser } from "../../types/user.interface";
 
