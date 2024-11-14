@@ -1,4 +1,4 @@
-import { Logotype } from "../Logotype/Logotype";
+import { Logotype } from "../../components/Logotype/Logotype";
 
 const Footer = () => {
     return (
