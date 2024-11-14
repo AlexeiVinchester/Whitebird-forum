@@ -1,13 +1,23 @@
 import { Card, CardContent, Typography, TextField, CardActions, Button } from "@mui/material";
+import { useEffect } from "react";
+import { loadUsersData } from "./loginPage.service";
 
 const LoginPage = () => {
-    
+
+    useEffect(() => {
+        (async () => {
+            const users = await loadUsersData();
+            console.log(users)
+        })();
+    }, [])
     return (
         <div className="flex justify-center items-center min-h-[calc(100vh-240px)]">
-            <Card className="w-[400px] py-2.5 px-1.5 !shadow-[0_5px_10px_#ABB2B9] !rounded-[16px]">
+            <Card className="w-[500px] py-10 px-6 !shadow-[0_5px_10px_#ABB2B9] !rounded-[16px]">
                 <CardContent>
-                    <Typography gutterBottom variant="h5" className="!mb-6">Log In</Typography>
-                    <form className="flex flex-col items-center justify-center gap-4">
+                    <Typography gutterBottom variant="h5" className="!mb-6 !text-[28px]">
+                        Log in
+                    </Typography>
+                    <form className="flex flex-col items-center justify-center gap-8">
                         <TextField
                             required
                             fullWidth
@@ -26,11 +36,12 @@ const LoginPage = () => {
                         />
                     </form>
                 </CardContent>
-                <CardActions>
+                <CardActions className="!px-4">
                     <Button
                         variant="contained"
                         color="primary"
                         fullWidth
+                        className="!py-3"
                     >
                         Log In
                     </Button>
