@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography, TextField, CardActions, Button } from '@mui/material';
 import React, { useCallback, useState } from 'react'
 import { IApiUser } from '../../types/user.interface';
-import { checkUsersInfo, isEmailFormatValid } from '../../utils/isLogInDataCorrect';
+import { checkUsersInfo, isEmailFormatValid } from '../../utils/logInHeplers';
 import { IEmailData } from '../../types/emailData.interface';
 
 interface ILoginFormProps {

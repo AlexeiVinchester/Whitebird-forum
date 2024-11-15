@@ -1,4 +1,4 @@
-export const apiEndpoints: Record<string, string> = {
+export const apiEndpoints: Readonly<Record<string, string>> = {
     users: '/users',
     posts: '/posts'
 };
