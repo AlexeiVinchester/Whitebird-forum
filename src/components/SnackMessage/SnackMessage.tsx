@@ -1,18 +1,16 @@
-import { Alert, Snackbar } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { hideSnackMessage } from "../../features/snackMessage/snackMessageSlice";
 import ReactDOM from "react-dom";
-import { selectSnackMessage } from "../../features/snackMessage/snackMessageSelectors";
+import { Alert, Snackbar } from "@mui/material";
+import { useSnackMessage } from "./useSnackMessage";
 
 const SnackMessage = () => {
-    const dispatch = useDispatch();
-    const { isOpen, message, severity } = useSelector(selectSnackMessage);
+    const {
+        isOpen,
+        message,
+        severity,
+        handleClose,
+        portalContainer
+    } = useSnackMessage();
 
-    const handleClose = () => {
-        dispatch(hideSnackMessage());
-    };
-
-    const portalContainer = document.getElementById('snackBar-portal');
     if (!portalContainer) {
         return null;
     }

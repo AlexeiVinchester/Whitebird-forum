@@ -4,7 +4,7 @@ import { IMessageInfo } from "../../types/messageInfo.interface";
 
 const snackMessageSlice = createSlice({
     name: 'snackMessage',
-    initialState: { ...initialSnackMessageState },
+    initialState: initialSnackMessageState,
     reducers: {
         showSnackMessage(state, action: PayloadAction<IMessageInfo>) {
             Object.assign(state, { ...action.payload, isOpen: true });

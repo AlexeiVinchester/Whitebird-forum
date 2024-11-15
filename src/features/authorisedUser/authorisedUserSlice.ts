@@ -4,7 +4,7 @@ import { ICustomUser } from "../../types/user.interface";
 
 const authorisedUserSlice = createSlice({
     name: 'authorisedUser',
-    initialState: { ...initialAuthorisedUserSlice },
+    initialState: initialAuthorisedUserSlice,
     reducers: {
         setNewAuthorisedUser(state, action: PayloadAction<ICustomUser>) {
             Object.assign(state, action.payload);

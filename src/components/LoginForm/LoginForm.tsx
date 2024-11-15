@@ -1,64 +1,21 @@
 import { Card, CardContent, Typography, TextField, CardActions, Button } from '@mui/material';
-import React, { useCallback, useState } from 'react'
-import { IApiUser, ICustomUser } from '../../types/user.interface';
-import { checkUsersInfo, isEmailFormatValid } from '../../utils/logInHeplers';
-import { IEmailData } from '../../types/emailData.interface';
-import { useDispatch } from 'react-redux';
-import { setNewAuthorisedUser } from '../../features/authorisedUser/authorisedUserSlice';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { showSuccessMessage } from '../../utils/snackMessageHelpers';
+import { IApiUser } from '../../types/user.interface';
+import { useLogIn } from './useLogIn';
 
 interface ILoginFormProps {
     users: IApiUser[];
 };
 
 const LoginForm = ({ users }: ILoginFormProps) => {
-    const [userName, setUserName] = useState('');
-    const [emailData, setEmailData] = useState<IEmailData>({
-        email: '',
-        isEmailValid: false
-    });
-    const [authError, setAuthError] = useState('');
-
-    const location = useLocation();
-    const fromPagePath = location.state?.from?.pathname || '/profile';
-
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const handleChangeUserName = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setUserName(e.target.value);
-        setAuthError('');
-    }, []);
-
-    const handleChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setEmailData((prev) => ({
-            ...prev,
-            email: e.target.value,
-            isEmailValid: isEmailFormatValid(e.target.value)
-        }));
-        setAuthError('');
-    }, []);
-
-    const handleClick = () => {
-        const { email } = emailData;
-        const { areCredentialsCorrect, userInfo, isAdmin } = checkUsersInfo(users, userName, email);
-        if (!areCredentialsCorrect) {
-            setAuthError('The username or email is incorrect.')
-        } else {
-            const authorisedUser: ICustomUser = {
-                ...userInfo,
-                isAuthorised: true,
-                isAdmin: false
-            };
-            if (isAdmin) {
-                authorisedUser.isAdmin = true;
-                dispatch(showSuccessMessage('Hello admin!'));
-            }
-            dispatch(setNewAuthorisedUser(authorisedUser));
-            navigate(fromPagePath, { replace: true });
-        }
-    };
+    const {
+        handleChangeEmail,
+        handleChangeUserName,
+        handleClick,
+        authError,
+        userName,
+        email,
+        isEmailValid
+    } = useLogIn(users);
 
     return (
         <Card className="w-[500px] py-10 px-6 !shadow-[0_5px_10px_#ABB2B9] !rounded-[16px]">
@@ -85,10 +42,10 @@ const LoginForm = ({ users }: ILoginFormProps) => {
                         variant="outlined"
                         label="Enter your email"
                         name="email"
-                        value={emailData.email}
+                        value={email}
                         onChange={handleChangeEmail}
-                        error={!emailData.isEmailValid && emailData.email.length > 0}
-                        helperText={!emailData.isEmailValid && emailData.email.length > 0 ? 'Please enter a valid email address' : ''}
+                        error={!isEmailValid && email.length > 0}
+                        helperText={!isEmailValid && email.length > 0 ? 'Please enter a valid email address' : ''}
                     />
                     {authError && (
                         <Typography variant="body2" color="error" className="mt-2">
@@ -104,7 +61,7 @@ const LoginForm = ({ users }: ILoginFormProps) => {
                     fullWidth
                     className="!py-3"
                     onClick={handleClick}
-                    disabled={!emailData.isEmailValid || !userName}
+                    disabled={!isEmailValid || !userName}
                 >
                     Log In
                 </Button>
