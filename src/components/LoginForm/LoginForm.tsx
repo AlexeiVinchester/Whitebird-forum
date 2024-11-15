@@ -3,6 +3,9 @@ import React, { useCallback, useState } from 'react'
 import { IApiUser } from '../../types/user.interface';
 import { checkUsersInfo, isEmailFormatValid } from '../../utils/logInHeplers';
 import { IEmailData } from '../../types/emailData.interface';
+import { useDispatch } from 'react-redux';
+import { setNewAuthorisedUser } from '../../features/authorisedUser/authorisedUserSlice';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface ILoginFormProps {
     users: IApiUser[];
@@ -15,6 +18,12 @@ const LoginForm = ({ users }: ILoginFormProps) => {
         isEmailValid: false
     });
     const [authError, setAuthError] = useState('');
+
+    const location = useLocation();
+    const fromPagePath = location.state?.from?.pathname || '/profile';
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleChangeUserName = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setUserName(e.target.value);
@@ -46,6 +55,8 @@ const LoginForm = ({ users }: ILoginFormProps) => {
                 console.log('He is admin')
             }
             console.log('Correct log in data: ', authorisedUser)
+            dispatch(setNewAuthorisedUser(authorisedUser));
+            navigate(fromPagePath, {replace: true})
         }
     };
 
