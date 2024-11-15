@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { loadUsersData } from "./loginPage.service";
 import { LoginForm } from "../../components/LoginForm/LoginForm";
 import { IApiUser } from "../../types/user.interface";
-import { ApiError } from "../../services/errors/apiError";
 import { Spinner } from "../../components/Spinner/Spinner";
+import { useDispatch } from "react-redux";
+import { showErrorMessage } from "../../utils/snackMessageHelpers";
 
 const LoginPage = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [apiUsers, setUsers] = useState<IApiUser[] | null>(null);
+    const dispatch = useDispatch();
     useEffect(() => {
         if (!apiUsers) {
             (async () => {
@@ -15,18 +17,14 @@ const LoginPage = () => {
                     const users = await loadUsersData();
                     setUsers(users);
                 } catch (error) {
-                    if (error instanceof ApiError) {
-                        console.log(`Status: ${error.httpStatus} - ${error.message}`);
-                    } else {
-                        console.log(`${(error as Error).message}`);
-                    }
+                    dispatch(showErrorMessage(error))
                 } finally {
                     setIsLoading(false);
                 }
 
             })();
         }
-    }, [apiUsers]);
+    }, [apiUsers, dispatch]);
 
     if (isLoading) {
         return <Spinner />

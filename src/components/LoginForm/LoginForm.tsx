@@ -1,11 +1,12 @@
 import { Card, CardContent, Typography, TextField, CardActions, Button } from '@mui/material';
 import React, { useCallback, useState } from 'react'
-import { IApiUser } from '../../types/user.interface';
+import { IApiUser, ICustomUser } from '../../types/user.interface';
 import { checkUsersInfo, isEmailFormatValid } from '../../utils/logInHeplers';
 import { IEmailData } from '../../types/emailData.interface';
 import { useDispatch } from 'react-redux';
 import { setNewAuthorisedUser } from '../../features/authorisedUser/authorisedUserSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { showSuccessMessage } from '../../utils/snackMessageHelpers';
 
 interface ILoginFormProps {
     users: IApiUser[];
@@ -45,18 +46,17 @@ const LoginForm = ({ users }: ILoginFormProps) => {
         if (!areCredentialsCorrect) {
             setAuthError('The username or email is incorrect.')
         } else {
-            const authorisedUser = {
+            const authorisedUser: ICustomUser = {
                 ...userInfo,
                 isAuthorised: true,
                 isAdmin: false
             };
             if (isAdmin) {
                 authorisedUser.isAdmin = true;
-                console.log('He is admin')
+                dispatch(showSuccessMessage('Hello admin!'));
             }
-            console.log('Correct log in data: ', authorisedUser)
             dispatch(setNewAuthorisedUser(authorisedUser));
-            navigate(fromPagePath, {replace: true})
+            navigate(fromPagePath, { replace: true });
         }
     };
 

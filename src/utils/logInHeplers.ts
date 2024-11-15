@@ -12,7 +12,7 @@ export const checkUsersInfo = (users: IApiUser[], userName: string, email: strin
     const authData = new Map(users.map(user => [createKey(user.username, user.email), user]));
     return {
         areCredentialsCorrect: authData.has(createKey(userName, email)),
-        userInfo: authData.get(createKey(userName, email)),
+        userInfo: authData.get(createKey(userName, email)) as IApiUser,
         isAdmin: isAdmin(userName, email)
     };
 };

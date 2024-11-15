@@ -25,7 +25,7 @@ export const makeApiRequest = async <T = undefined>(url: string, method: THTTPMe
                 );
             } else {
                 throw new ApiError(
-                    'Network error: No response from the server',
+                    serverError.message,
                     0
                 );
             }

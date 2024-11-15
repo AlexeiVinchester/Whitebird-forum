@@ -1,38 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { initialAuthorisedUserSlice } from "./authorisedUser.initial";
 import { ICustomUser } from "../../types/user.interface";
-
-
-const initialAuthorisedUserSlice: ICustomUser = {
-    id: 1,
-    name: "",
-    username: "",
-    email: "",
-    address: {
-        street: "",
-        suite: "",
-        city: "",
-        zipcode: "",
-        geo: {
-            lat: "",
-            lng: ""
-        }
-    },
-    phone: "",
-    website: "",
-    company: {
-        name: "",
-        catchPhrase: "",
-        bs: ""
-    },
-    isAdmin: false,
-    isAuthorised: false
-};
 
 const authorisedUserSlice = createSlice({
     name: 'authorisedUser',
     initialState: { ...initialAuthorisedUserSlice },
     reducers: {
-        setNewAuthorisedUser(state, action) {
+        setNewAuthorisedUser(state, action: PayloadAction<ICustomUser>) {
             Object.assign(state, action.payload);
         },
         deleteAuthorisedUser() {
