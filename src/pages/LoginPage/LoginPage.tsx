@@ -1,9 +1,10 @@
 import { LoginForm } from "../../components/LoginForm/LoginForm";
 import { Spinner } from "../../components/Spinner/Spinner";
-import { useLoadUsersCredentials } from "./useLoadUsersCredentials";
+import { useLoadData } from "../../hooks/useLoadData";
+import { loadApiUsers } from "../../services/loadApiUsers";
 
 const LoginPage = () => {
-    const { isLoading, apiUsers } = useLoadUsersCredentials();
+    const { isLoading, apiData: apiUsers } = useLoadData(loadApiUsers);
 
     if (isLoading) {
         return <Spinner />
