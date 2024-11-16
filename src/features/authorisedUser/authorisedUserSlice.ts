@@ -9,11 +9,11 @@ const authorisedUserSlice = createSlice({
         setNewAuthorisedUser(state, action: PayloadAction<ICustomUser>) {
             Object.assign(state, action.payload);
         },
-        deleteAuthorisedUser() {
+        logOutAuthorisedUser() {
             return { ...initialAuthorisedUserSlice };
         }
     }
 });
 
-export const { setNewAuthorisedUser, deleteAuthorisedUser } = authorisedUserSlice.actions;
+export const { setNewAuthorisedUser, logOutAuthorisedUser } = authorisedUserSlice.actions;
 export default authorisedUserSlice.reducer;
