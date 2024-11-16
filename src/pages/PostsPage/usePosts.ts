@@ -29,5 +29,5 @@ export const usePosts = () => {
         setSelectedUserId(+e.target.value || null);
     };
 
-    return { posts, isLoadingPosts, handleChangeSelect };
+    return { posts, isLoadingPosts, handleChangeSelect, setPosts };
 };

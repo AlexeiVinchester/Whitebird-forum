@@ -18,3 +18,8 @@ export const checkUsersInfo = (users: IApiUser[], userName: string, email: strin
 };
 
 export const isEmailFormatValid = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+export const getUserNameById = (users: IApiUser[], id: number) => {
+    const usersMap = new Map(users.map(user => [user.id, user.name]));
+    return usersMap.get(id) || 'Unknown user';
+}
