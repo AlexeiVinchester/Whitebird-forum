@@ -1,33 +1,19 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { IApiPost } from "../../types/post.interface";
-import { showErrorMessage } from "../../utils/snackMessageHelpers";
-import { loadApiPosts } from "./loadApiPosts.service";
+import { useState } from "react";
+import { useLoadData } from "../../hooks/useLoadData";
+import { loadApiUsers } from "../../services/loadApiUsers";
 
-export const usePosts = () => {
+export const useSelectedUsers = () => {
     const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
-    const [posts, setPosts] = useState<IApiPost[] | null>(null);
-    const [isLoadingPosts, setIsLoadingPosts] = useState(true);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        (async () => {
-            try {
-                setIsLoadingPosts(true);
-                const posts: IApiPost[] = await loadApiPosts(selectedUserId);
-                setPosts(posts);
-            } catch (error) {
-                dispatch(showErrorMessage(error));
-            } finally {
-                setIsLoadingPosts(false);
-            }
-
-        })()
-    }, [dispatch, selectedUserId]);
+    const { isLoading: isLoadingUsers, apiData: apiUsers } = useLoadData(loadApiUsers);
 
     const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedUserId(+e.target.value || null);
     };
 
-    return { posts, isLoadingPosts, handleChangeSelect, setPosts };
+    return {
+        handleChangeSelect,
+        selectedUserId,
+        isLoadingUsers,
+        apiUsers
+    };
 };

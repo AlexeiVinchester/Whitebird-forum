@@ -1,7 +1,10 @@
+import { useParams } from "react-router-dom";
+
 const SinglePostPage = () => {
+    const {postId} = useParams()
     return (
         <div>
-            Single Post Page
+            Single Post Page: id - {postId}
         </div>
     );
 };

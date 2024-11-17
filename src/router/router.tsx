@@ -14,10 +14,7 @@ const router = createBrowserRouter(
                 <AuthProvider>
                     <ProfilePage />
                 </AuthProvider>} />
-            <Route path="/posts/:postId" element={
-                <AuthProvider>
-                    <SinglePostPage />
-                </AuthProvider>} />
+            <Route path="/posts/:postId" element={<SinglePostPage />} />
             <Route path="/login" element={<LoginPage />} />
         </Route>
     ),
