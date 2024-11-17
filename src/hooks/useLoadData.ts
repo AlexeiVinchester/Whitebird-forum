@@ -9,7 +9,6 @@ export const useLoadData = <T, P = void>(loaderData: TLoaderData<T[], P>, params
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log('run effect');
         (async () => {
             try {
                 setIsLoading(true);
@@ -24,5 +23,5 @@ export const useLoadData = <T, P = void>(loaderData: TLoaderData<T[], P>, params
         })();
     }, [dispatch, loaderData, params]);
 
-    return { isLoading, apiData, dispatch };
+    return { isLoading, apiData, dispatch, setApiData };
 };

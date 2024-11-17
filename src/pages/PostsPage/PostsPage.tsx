@@ -1,5 +1,5 @@
 import { Spinner } from "../../components/Spinner/Spinner";
-import { useSelectedUsers } from "./usePosts";
+import { useSelectedUsers } from "./useSelectedUsers";
 import { IApiUser } from "../../types/user.interface";
 import { PostsList } from "../../components/PostsList/PostsList";
 
