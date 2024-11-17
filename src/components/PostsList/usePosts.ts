@@ -10,7 +10,7 @@ export const usePosts = (selectedUserId: number | null) => {
         isLoading: isLoadingPosts, 
         apiData: posts,
         setApiData: setPosts 
-    } = useLoadData<ICustomPost, number | null>(loadApiPosts, selectedUserId);
+    } = useLoadData<ICustomPost[], number | null>(loadApiPosts, selectedUserId);
 
     const handleClickDeletePost = (id: number) => {
         setPosts((prevPosts) => prevPosts?.filter(

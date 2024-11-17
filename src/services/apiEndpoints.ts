@@ -1,4 +1,5 @@
 export const apiEndpoints: Readonly<Record<string, string>> = {
     users: '/users',
-    posts: '/posts'
+    posts: '/posts',
+    comments: '/comments'
 };

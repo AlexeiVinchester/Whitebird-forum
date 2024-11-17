@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import { TLoaderData } from "../types/loaderOfData.type";
 import { showErrorMessage } from "../utils/snackMessageHelpers";
 
-export const useLoadData = <T, P = void>(loaderData: TLoaderData<T[], P>, params?: P) => {
+export const useLoadData = <T, P = void>(loaderData: TLoaderData<T, P>, params?: P) => {
     const [isLoading, setIsLoading] = useState(true);
-    const [apiData, setApiData] = useState<T[] | null>(null);
+    const [apiData, setApiData] = useState<T | null>(null);
     const dispatch = useDispatch();
 
     useEffect(() => {

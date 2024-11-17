@@ -1,11 +1,19 @@
-import { useParams } from "react-router-dom";
+import { IApiUser } from "../../types/user.interface";
+import { useLoadData } from "../../hooks/useLoadData";
+import { loadApiUsers } from "../../services/loadApiUsers";
+import { Spinner } from "../../components/Spinner/Spinner";
+import { SinglePostCard } from "../../components/SinglePostCard/SinglePostCard";
 
 const SinglePostPage = () => {
-    const {postId} = useParams()
+    const { isLoading: isLoadingUsers, apiData: apiUsers } = useLoadData<IApiUser[]>(loadApiUsers);
+    console.log(apiUsers);
+
+    if (isLoadingUsers) {
+        return <Spinner />
+    }
+
     return (
-        <div>
-            Single Post Page: id - {postId}
-        </div>
+        <SinglePostCard apiUsers={apiUsers}/>
     );
 };
 

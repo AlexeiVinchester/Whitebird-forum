@@ -7,8 +7,11 @@ export const getUrlForPosts = (userId: number | null) => {
         : apiEndpoints.posts;
 };
 
-export const getCustomPosts = (posts: IApiPost[]): ICustomPost[] => {
-    return posts.map(post => (
-        { ...post, isLiked: false, isSaved: false }
-    ));
+export const getCustomPost = (post: IApiPost): ICustomPost => {
+    return {...post, isLiked: false, isSaved: false};
 };
+
+export const getCustomPosts = (posts: IApiPost[]): ICustomPost[] => {
+    return posts.map(post => getCustomPost(post));
+};
+

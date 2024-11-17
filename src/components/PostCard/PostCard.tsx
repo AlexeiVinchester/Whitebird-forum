@@ -3,9 +3,9 @@ import { IApiUser } from "../../types/user.interface";
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import DeleteIcon from '@mui/icons-material/Delete';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { ICustomPost } from "../../types/post.interface";
 import { getUserNameById } from "../../utils/logInHeplers";
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsAuthorisedFlag } from "../../features/authorisedUser/authorisedUserSelectors";
@@ -17,16 +17,9 @@ interface IPostCard {
     handleClickDeletePost: (id: number) => void;
     handleClickLike: (id: number) => void;
     handleClickSavePost: (id: number) => void;
-}
+};
 
-const PostCard = ({
-    post,
-    currentUserId,
-    apiUsers,
-    handleClickDeletePost,
-    handleClickLike,
-    handleClickSavePost
-}: IPostCard) => {
+const PostCard = ({ post, currentUserId, apiUsers, handleClickDeletePost, handleClickLike, handleClickSavePost}: IPostCard) => {
     const navigate = useNavigate();
     const handleClickOpen = () => {
         navigate(`/posts/${post.id}`);
