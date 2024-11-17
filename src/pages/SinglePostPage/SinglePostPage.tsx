@@ -6,7 +6,6 @@ import { SinglePostCard } from "../../components/SinglePostCard/SinglePostCard";
 
 const SinglePostPage = () => {
     const { isLoading: isLoadingUsers, apiData: apiUsers } = useLoadData<IApiUser[]>(loadApiUsers);
-    console.log(apiUsers);
 
     if (isLoadingUsers) {
         return <Spinner />

@@ -1,7 +1,3 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { useLoadData } from "../../hooks/useLoadData";
-import { loadApiPost } from "../../pages/SinglePostPage/loadApiPost.service";
-import { ICustomPost } from "../../types/post.interface";
 import { Spinner } from "../Spinner/Spinner";
 import { IApiUser } from "../../types/user.interface";
 import { Card, CardHeader, Avatar, IconButton, CardContent, Typography, Divider, CardActions } from "@mui/material";
@@ -11,59 +7,28 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CommentIcon from '@mui/icons-material/Comment';
-import { useSelector } from "react-redux";
-import { selectIsAuthorisedFlag, selectIsAuthorisedUser } from "../../features/authorisedUser/authorisedUserSelectors";
-import { useState } from "react";
 import { CommentsContainer } from "../CommentsContainer/CommentsContainer";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
+import { useNavigation } from "./useNavigation";
+import { useComments } from "./useComments";
+import { usePost } from "./usePost";
 
 interface ISinglePostCard {
     apiUsers: IApiUser[] | null;
 };
 
 const SinglePostCard = ({ apiUsers }: ISinglePostCard) => {
-    const { postId } = useParams<{postId: string}>();
+    const { id: currentUserId, isAuthorised } = useCurrentUser();
+    const { isShowComments, handleClickComments } = useComments();
+    const { postId, handleClickAllPosts } = useNavigation();
     const {
-        isLoading: isLoadingPost,
-        apiData: post,
-        setApiData: setPost
-    } = useLoadData<ICustomPost, string>(loadApiPost, postId);
+        post,
+        isLoadingPost,
+        handleClickDelete,
+        handleClickSave,
+        handleClickLike
+    } = usePost(postId);
 
-    const [isShowComments, setIsShowComments] = useState(false);
-
-    const handleClickComments = async () => {
-        setIsShowComments(!isShowComments);
-
-    };
-
-    const currentUserId = useSelector(selectIsAuthorisedUser).id;
-    const isAuthorised = useSelector(selectIsAuthorisedFlag);
-
-    const navigate = useNavigate();
-
-    const handleClickAllPosts = () => navigate('/posts');
-
-    const handleClickDelete = () => setPost(null);
-
-    const handleClickLike = () => {
-        setPost((prev) => {
-            if (!prev) {
-                return prev;
-            } else {
-                return { ...prev, isLiked: !prev.isLiked };
-            }
-
-        });
-    };
-
-    const handleClickSave = () => {
-        setPost((prev) => {
-            if (!prev) {
-                return prev;
-            } else {
-                return { ...prev, isSaved: !prev.isSaved };
-            }
-        });
-    };
 
     if (isLoadingPost) {
         return <Spinner />
@@ -160,7 +125,7 @@ const SinglePostCard = ({ apiUsers }: ISinglePostCard) => {
             </Card>
             :
             (<p>Post was deleted</p>)
-    )
-}
+    );
+};
 
 export { SinglePostCard };

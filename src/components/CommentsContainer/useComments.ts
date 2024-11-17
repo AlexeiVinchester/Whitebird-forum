@@ -1,5 +1,4 @@
-import { useSelector } from "react-redux";
-import { selectIsAuthorisedUser } from "../../features/authorisedUser/authorisedUserSelectors";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { useLoadData } from "../../hooks/useLoadData";
 import { IComment } from "../../types/comment.interface";
 import { loadApiComments } from "../CommentsList/loadApiComments.service";
@@ -11,7 +10,7 @@ export const useComments = (postId: string | undefined) => {
         setApiData: setComments
     } = useLoadData<IComment[], string>(loadApiComments, postId);
 
-    const currentUser = useSelector(selectIsAuthorisedUser);
+    const currentUser = useCurrentUser();
 
     const handleClickAdd = (body: string) => {
         if (body.trim()) {
