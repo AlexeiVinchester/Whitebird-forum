@@ -1,26 +1,34 @@
 import { Spinner } from "../Spinner/Spinner";
 import { IApiUser } from "../../types/user.interface";
 import { Card, CardHeader, Avatar, IconButton, CardContent, Typography, Divider, CardActions } from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
 import { CommentsContainer } from "../CommentsContainer/CommentsContainer";
-import { useSinglePostCard } from "./useSinglePostCard";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
+import { useComments } from "./useComments";
+import { usePost } from "./usePost";
+import { useNavigation } from "./useNavigation";
 import { StyledIconButton } from "../StyledIconButton/StyledIconButton";
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import CommentIcon from '@mui/icons-material/Comment';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface ISinglePostCard {
     apiUsers: IApiUser[] | null;
 };
 
 const SinglePostCard = ({ apiUsers }: ISinglePostCard) => {
+    const { id: currentUserId, isAuthorised } = useCurrentUser();
+    const { isShowComments, handleClickComments } = useComments();
+    const { postId, handleClickAllPosts } = useNavigation();
     const {
-        currentUserId,
-        isShowComments,
-        postId,
         post,
         isLoadingPost,
         postAuthorName,
-        buttonsConfig,
         handleClickDelete,
-    } = useSinglePostCard(apiUsers)
+        handleClickSave,
+        handleClickLike
+    } = usePost(postId, apiUsers);
 
     if (isLoadingPost) {
         return <Spinner />
@@ -70,17 +78,36 @@ const SinglePostCard = ({ apiUsers }: ISinglePostCard) => {
 
                 <CardActions>
                     <div className=" w-full flex justify-around items-center">
-                        {buttonsConfig.map(btn => (
+                        {isAuthorised && <>
                             <StyledIconButton
-                                key={btn.id}
-                                onClick={btn.onClick}
-                                value={btn.value}
-                                clickFlag={btn.clickFlag}
-                                color={btn.color}
+                                onClick={handleClickLike}
+                                value="Like"
+                                clickFlag={post.isLiked}
                             >
-                                {btn.children}
+                                <ThumbUpAltIcon />
                             </StyledIconButton>
-                        ))}
+                            <StyledIconButton
+                                onClick={handleClickSave}
+                                clickFlag={post.isSaved}
+                                color='text-yellow-400'
+                                value="Save"
+                            >
+                                <BookmarkIcon />
+                            </StyledIconButton>
+                        </>}
+                        <StyledIconButton
+                            onClick={handleClickComments}
+                            value="Comments"
+                            clickFlag={isShowComments}
+                        >
+                            <CommentIcon />
+                        </StyledIconButton>
+                        <StyledIconButton
+                            onClick={handleClickAllPosts}
+                            value="All posts"
+                        >
+                            <ArrowBackIcon />
+                        </StyledIconButton>
                     </div>
                 </CardActions>
                 {isShowComments &&
