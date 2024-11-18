@@ -16,6 +16,6 @@ export const getCustomPosts = (posts: IApiPost[]): ICustomPost[] => {
 };
 
 export const getMaxPotId = (posts: ICustomPost[]) => {
-    return Math.max(...new Set(posts.map(post => post.id)));
+    return Math.max(...posts.map(post => post.id));
 };
 

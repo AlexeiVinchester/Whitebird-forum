@@ -1,7 +1,7 @@
 import { Spinner } from "../../components/Spinner/Spinner";
 import { useSelectedUsers } from "./useSelectedUsers";
-import { IApiUser } from "../../types/user.interface";
 import { PostsContainer } from "../../components/PostsContainer/PostsContainer";
+import { SelectUsersContainer } from "../../components/SelectUsersContainer/SelectUsersContainer";
 
 const PostsPage = () => {
     const {
@@ -16,27 +16,17 @@ const PostsPage = () => {
     }
 
     return (
-        <div className="flex flex-col items-center">
-            <div className="flex justify-center items-center mb-2">
-                <select
-                    className="rounded-[22px] p-2 border-2 focus:border-none bg-back-side-statistics  border-basic-color"
-                    onChange={handleChangeSelect}
-                >
-                    <option value="">All</option>
-                    {
-                        apiUsers?.map(user => (
-                            <option
-                                key={user.id}
-                                value={user.id}
-                            >
-                                {user.name}
-                            </option>
-                        ))
-                    }
-                </select>
-            </div>
-            <PostsContainer apiUsers={apiUsers as IApiUser[]} selectedUserId={selectedUserId} />
-        </div>
+        <>
+            {
+                apiUsers ?
+                    <div className="flex flex-col items-center">
+                        <SelectUsersContainer apiUsers={apiUsers} handleChangeSelect={handleChangeSelect} />
+                        <PostsContainer apiUsers={apiUsers} selectedUserId={selectedUserId} />
+                    </div>
+                    :
+                    <h1>Yooops</h1>
+            }
+        </>
     );
 };
 

@@ -30,11 +30,11 @@ const PostCardContainer = React.memo(({ post, currentUserId, apiUsers, deletePos
         isLiked,
         isSaved
     } = post;
+
     const navigate = useNavigate();
     const handleClickOpen = useCallback(() => {
         navigate(`/posts/${postId}`);
     }, [navigate, postId]);
-
 
     const isAuthorised = useCurrentUser().isAuthorised;
 
