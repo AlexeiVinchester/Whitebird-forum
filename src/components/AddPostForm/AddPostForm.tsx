@@ -1,17 +1,19 @@
 import { Card, CardContent, Typography, TextField, CardActions, Button } from "@mui/material";
 import { useCallback, useState } from "react";
 import { ICustomPost } from "../../types/post.interface";
+import { useDispatch } from "react-redux";
+import { closeModalWindow } from "../../features/modalWindow/modalWindowSlice";
 
 interface IAddPostForm {
     lastId: number;
     userId: number;
-    closeModal: () => void;
     addPost: (post: ICustomPost) => void;
 };
 
-const AddPostForm = ({lastId, userId, closeModal, addPost}: IAddPostForm) => {
+const AddPostForm = ({lastId, userId, addPost}: IAddPostForm) => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
+    const dispatch = useDispatch();
 
     const handleChangeTitle = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setTitle(e.target.value);
@@ -31,7 +33,7 @@ const AddPostForm = ({lastId, userId, closeModal, addPost}: IAddPostForm) => {
             isSaved: false
         };
         addPost(newPost);
-        closeModal();
+        dispatch(closeModalWindow());
     };
 
     return (

@@ -4,10 +4,10 @@ import { PostCardContainer } from "../PostCardContainer/PostCardContainer";
 import { usePosts } from "./usePosts";
 import { StyledIconButton } from "../StyledIconButton/StyledIconButton";
 import PostAddIcon from '@mui/icons-material/PostAdd';
-import { useModal } from "../../hooks/useModal";
-import { ModalWindow } from "../../layouts/ModalWindow/ModalWindow";
 import { AddPostForm } from "../AddPostForm/AddPostForm";
 import { ICustomPost } from "../../types/post.interface";
+import { openModalWindow } from "../../features/modalWindow/modalWindowSlice";
+import { ModalWindow } from "../../layouts/ModalWindow/ModalWindow";
 interface IPostsList {
     selectedUserId: number | null;
     apiUsers: IApiUser[];
@@ -21,29 +21,29 @@ const PostsList = ({ selectedUserId, apiUsers }: IPostsList) => {
         deletePost,
         likePost,
         savePost,
-        setPosts
+        setPosts,
+        dispatch
     } = usePosts(selectedUserId);
-
-    const { isOpen, open, close } = useModal();
-    
-
-    const handleClickAdd = () => {
-        open();
-    };
 
     const addNewPost = (post: ICustomPost) => {
         setPosts((prev) => [...prev || [], post]);
     };
 
+    const handleClickAdd = () => {
+        dispatch(openModalWindow(
+            <AddPostForm
+                lastId={posts?.length as number}
+                userId={currentUser.id}
+                addPost={addNewPost}
+            />
+        ));
+    };
+
     console.log(posts)
 
-    const filteredPosts: ICustomPost[] = posts?.filter((post) => post.userId !== currentUser.id) as ICustomPost[];
-    console.log(filteredPosts);
     if (isLoadingPosts) {
-        return <Spinner />
+        return <Spinner />;
     }
-
-
 
     return (
         <>
@@ -69,16 +69,7 @@ const PostsList = ({ selectedUserId, apiUsers }: IPostsList) => {
                 ))
                 }
             </div>
-            {isOpen &&
-                <ModalWindow isOpen={isOpen} closeModal={close}>
-                    <AddPostForm
-                        lastId={posts?.length as number}
-                        userId={currentUser.id}
-                        closeModal={close}
-                        addPost={addNewPost}
-                    />
-                </ModalWindow>
-            }
+            <ModalWindow />
         </>
     );
 };

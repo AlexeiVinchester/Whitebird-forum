@@ -1,23 +1,25 @@
 import { Dialog, IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
+import { useDispatch, useSelector } from "react-redux";
+import { TRootState } from "../../app/store";
+import { closeModalWindow } from "../../features/modalWindow/modalWindowSlice";
 
-interface IModalWindow {
-    isOpen: boolean;
-    closeModal: () => void;
-    children: React.ReactNode;
-};
+const ModalWindow = () => {
+    const { isOpen, element } = useSelector((state: TRootState) => state.modalWindow);
+    const dispatch = useDispatch();
+    const handleClose = () => dispatch(closeModalWindow());
 
-const ModalWindow = ({ isOpen, closeModal, children }: IModalWindow) => {
+    if (!isOpen) return null;
     return (
         <Dialog open={isOpen}>
             <IconButton
                 className="!absolute right-2 top-2 !text-basic-color"
-                onClick={closeModal}
+                onClick={handleClose}
             >
                 <CloseIcon />
             </IconButton>
 
-            {children}
+            {element}
         </Dialog>
     );
 };
