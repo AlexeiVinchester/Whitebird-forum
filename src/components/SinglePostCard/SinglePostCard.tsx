@@ -31,7 +31,6 @@ const SinglePostCard = ({ apiUsers }: ISinglePostCard) => {
     return (
         post ?
             <PostCard
-                postId={postId as string}
                 postAuthorName={postAuthorName}
                 currentUserId={currentUserId}
                 handleClickDelete={handleClickDelete}

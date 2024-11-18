@@ -5,7 +5,6 @@ import React from "react";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { useNavigateToSinglePost } from "./useNavigateToSinglePost";
 import { usePost } from "./usePost";
-import { useParams } from "react-router-dom";
 import { PostCard } from "../PostCard/PostCard";
 
 export interface IPostCardContainer {
@@ -29,11 +28,9 @@ const PostCardContainer = React.memo((props: IPostCardContainer) => {
     const handleClickOpen = useNavigateToSinglePost(post.id);
 
     const isAuthorised = useCurrentUser().isAuthorised;
-    const { postId } = useParams();
-
+    
     return (
         <PostCard 
-            postId={postId as string}
             postAuthorName={postAuthorName}
             currentUserId={props.currentUserId}
             handleClickDelete={handleClickDeletePost}

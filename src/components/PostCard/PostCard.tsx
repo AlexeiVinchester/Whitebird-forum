@@ -8,9 +8,9 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CommentIcon from '@mui/icons-material/Comment';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useParams } from "react-router-dom";
 
 interface IPostCard {
-    postId: string;
     postAuthorName: string;
     currentUserId: number;
     post: ICustomPost;
@@ -32,12 +32,12 @@ export const PostCard = ({
     handleClickLike,
     handleClickSave,
     post,
-    postId,
     isAuthorised,
     handleClickComments,
     isShowComments,
     handleClickOpen
 }: IPostCard) => {
+    const {postId} = useParams();
     return (
         <Card
             variant="outlined"
