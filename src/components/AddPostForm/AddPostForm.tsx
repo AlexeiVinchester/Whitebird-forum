@@ -1,40 +1,22 @@
 import { Card, CardContent, Typography, TextField, CardActions, Button } from "@mui/material";
-import { useCallback, useState } from "react";
 import { ICustomPost } from "../../types/post.interface";
-import { useDispatch } from "react-redux";
-import { closeModalWindow } from "../../features/modalWindow/modalWindowSlice";
+import { useCreateNewPost } from "./useCreateNewPost";
+
 
 interface IAddPostForm {
-    lastId: number;
-    userId: number;
+    lastPostId: number;
     addPost: (post: ICustomPost) => void;
+    selectedUserId: number | null;
 };
 
-const AddPostForm = ({lastId, userId, addPost}: IAddPostForm) => {
-    const [title, setTitle] = useState('');
-    const [body, setBody] = useState('');
-    const dispatch = useDispatch();
-
-    const handleChangeTitle = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setTitle(e.target.value);
-    }, []);
-
-    const handleChangeBody = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setBody(e.target.value);
-    }, []);
-
-    const handleClickAddPost = () => {
-        const newPost: ICustomPost = {
-            userId,
-            id: lastId + 1,
-            title,
-            body,
-            isLiked: false,
-            isSaved: false
-        };
-        addPost(newPost);
-        dispatch(closeModalWindow());
-    };
+const AddPostForm = ({ lastPostId, addPost, selectedUserId }: IAddPostForm) => {
+    const {
+        title,
+        body,
+        handleChangeTitle,
+        handleChangeBody,
+        handleClickAddPost
+    } = useCreateNewPost(selectedUserId, lastPostId, addPost);
 
     return (
         <Card className="!w-[500px] !py-10 !px-6 !shadow-[0_5px_10px_#ABB2B9] !rounded-[16px]">
@@ -72,6 +54,7 @@ const AddPostForm = ({lastId, userId, addPost}: IAddPostForm) => {
                     fullWidth
                     className="!py-3"
                     onClick={handleClickAddPost}
+                    disabled={!title || !body}
                 >
                     Add post
                 </Button>

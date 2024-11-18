@@ -8,10 +8,14 @@ export const getUrlForPosts = (userId: number | null) => {
 };
 
 export const getCustomPost = (post: IApiPost): ICustomPost => {
-    return {...post, isLiked: false, isSaved: false};
+    return { ...post, isLiked: false, isSaved: false };
 };
 
 export const getCustomPosts = (posts: IApiPost[]): ICustomPost[] => {
     return posts.map(post => getCustomPost(post));
+};
+
+export const getMaxPotId = (posts: ICustomPost[]) => {
+    return Math.max(...new Set(posts.map(post => post.id)));
 };
 

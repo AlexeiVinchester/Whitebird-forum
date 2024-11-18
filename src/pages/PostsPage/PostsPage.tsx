@@ -1,7 +1,7 @@
 import { Spinner } from "../../components/Spinner/Spinner";
 import { useSelectedUsers } from "./useSelectedUsers";
 import { IApiUser } from "../../types/user.interface";
-import { PostsList } from "../../components/PostsList/PostsList";
+import { PostsContainer } from "../../components/PostsContainer/PostsContainer";
 
 const PostsPage = () => {
     const {
@@ -35,7 +35,7 @@ const PostsPage = () => {
                     }
                 </select>
             </div>
-            <PostsList apiUsers={apiUsers as IApiUser[]} selectedUserId={selectedUserId} />
+            <PostsContainer apiUsers={apiUsers as IApiUser[]} selectedUserId={selectedUserId} />
         </div>
     );
 };

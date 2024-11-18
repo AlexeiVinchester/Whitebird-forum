@@ -35,6 +35,7 @@ const PostCardContainer = React.memo(({ post, currentUserId, apiUsers, deletePos
         navigate(`/posts/${postId}`);
     }, [navigate, postId]);
 
+
     const isAuthorised = useCurrentUser().isAuthorised;
 
     const postAuthorName = useMemo(() => {
