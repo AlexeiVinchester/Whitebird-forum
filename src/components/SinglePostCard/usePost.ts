@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useLoadData } from "../../hooks/useLoadData";
 import { loadApiPost } from "../../pages/SinglePostPage/loadApiPost.service";
 import { ICustomPost } from "../../types/post.interface";
@@ -12,7 +12,9 @@ export const usePost = (postId: string | undefined, users: IApiUser[] | null) =>
         setApiData: setPost
     } = useLoadData<ICustomPost, string>(loadApiPost, postId);
 
-    const postAuthorName = getUserNameById(users as IApiUser[], post?.userId as number);
+    const postAuthorName = useMemo(() => {
+        return getUserNameById(users as IApiUser[], post?.userId as number)
+    }, [post?.userId, users]);
 
     const handleClickDelete = useCallback(() => setPost(null), [setPost]);
 
@@ -37,12 +39,12 @@ export const usePost = (postId: string | undefined, users: IApiUser[] | null) =>
         });
     }, [setPost]);
 
-    return { 
-        post, 
-        isLoadingPost, 
+    return {
+        post,
+        isLoadingPost,
         postAuthorName,
-        handleClickDelete, 
-        handleClickSave, 
-        handleClickLike 
+        handleClickDelete,
+        handleClickSave,
+        handleClickLike
     };
 };

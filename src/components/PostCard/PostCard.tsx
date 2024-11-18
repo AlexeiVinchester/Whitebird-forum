@@ -9,52 +9,74 @@ import { getUserNameById } from "../../utils/logInHeplers";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsAuthorisedFlag } from "../../features/authorisedUser/authorisedUserSelectors";
+import { useCallback, useMemo } from "react";
+import React from "react";
+import { StyledIconButton } from "../StyledIconButton/StyledIconButton";
 
 interface IPostCard {
     post: ICustomPost;
     currentUserId: number;
     apiUsers: IApiUser[];
-    handleClickDeletePost: (id: number) => void;
-    handleClickLike: (id: number) => void;
-    handleClickSavePost: (id: number) => void;
+    deletePost: (id: number) => void;
+    likePost: (id: number) => void;
+    savePost: (id: number) => void;
 };
 
-const PostCard = ({ post, currentUserId, apiUsers, handleClickDeletePost, handleClickLike, handleClickSavePost}: IPostCard) => {
+const PostCard = React.memo(({ post, currentUserId, apiUsers, deletePost, likePost, savePost }: IPostCard) => {
+    const {
+        id: postId,
+        userId: postUserId,
+        title,
+        body,
+        isLiked,
+        isSaved
+    } = post;
     const navigate = useNavigate();
-    const handleClickOpen = () => {
-        navigate(`/posts/${post.id}`);
-    };
+    const handleClickOpen = useCallback(() => {
+        navigate(`/posts/${postId}`);
+    }, [navigate, postId]);
 
     const isAuthorised = useSelector(selectIsAuthorisedFlag);
+
+    const postAuthorName = useMemo(() => {
+        return getUserNameById(apiUsers as IApiUser[], postUserId);
+    }, [apiUsers, postUserId]);
+
+    const handleClickDeletePost = useCallback(() => {
+        deletePost(postId);
+    }, [deletePost, postId]);
+
+    const handleClickLikePost = useCallback(() => {
+        likePost(postId)
+    }, [likePost, postId]);
+
+    const handleClickSavePost = useCallback(() => {
+        savePost(postId)
+    }, [savePost, postId]);
 
     return (
         <Card
             variant="outlined"
-            sx={{
-                width: '90%',
-                boxShadow: '0 5px 20px #ABB2B9;',
-                borderRadius: '22px'
-            }}
+            className="!w-[90%] !shadow-[0_5px_20px_#ABB2B9] !rounded-[22px]"
         >
             <div className="flex justify-between relative">
                 <CardHeader
                     avatar={
                         <Avatar
-                            alt={post.title}
                             src="/assets/avatar.png"
                             className="!w-10 !h-10"
                         />
                     }
                     title={
                         <h3 className="text-3xl font-bold text-blue-700">
-                            {getUserNameById(apiUsers as IApiUser[], post.userId)}
+                            {postAuthorName}
                         </h3>}
                 />
                 {
-                    currentUserId === post.userId &&
+                    currentUserId === postUserId &&
                     <IconButton
                         className="!relative !right-2 !h-full !top-3"
-                        onClick={() => handleClickDeletePost(post.id)}
+                        onClick={handleClickDeletePost}
                     >
                         <DeleteIcon />
                     </IconButton>
@@ -64,43 +86,44 @@ const PostCard = ({ post, currentUserId, apiUsers, handleClickDeletePost, handle
             <CardContent>
                 <div className="flex items-center mb-2 gap-2">
                     <Typography variant="h4" component="p">
-                        {post.title}
+                        {title}
                     </Typography>
                 </div>
                 <Divider />
                 <Typography variant="h6" component="p">
-                    {post.body}
+                    {body}
                 </Typography>
             </CardContent>
 
             <CardActions>
                 <div className=" w-full flex justify-around items-center">
                     {isAuthorised && <>
-                        <IconButton
-                            onClick={() => handleClickLike(post.id)}
+                        <StyledIconButton
+                            onClick={handleClickLikePost}
+                            value="Like"
+                            clickFlag={isLiked}
                         >
-                            <ThumbUpAltIcon
-                                className={post.isLiked ? 'text-basic-color' : ''}
-                            />
-                        </IconButton>
-                        <IconButton
-                            onClick={() => handleClickSavePost(post.id)}
+                            <ThumbUpAltIcon />
+                        </StyledIconButton>
+                        <StyledIconButton
+                            onClick={handleClickSavePost}
+                            clickFlag={isSaved}
+                            color='text-yellow-400'
+                            value="Save"
                         >
-                            <BookmarkIcon
-                                className={post.isSaved ? 'text-yellow-400' : ''}
-                            />
-                        </IconButton>
+                            <BookmarkIcon />
+                        </StyledIconButton>
                     </>}
 
-                    <IconButton
+                    <StyledIconButton
                         onClick={handleClickOpen}
                     >
                         <OpenInNewIcon />
-                    </IconButton>
+                    </StyledIconButton>
                 </div>
             </CardActions>
         </Card>
     );
-};
+});
 
 export { PostCard }; 

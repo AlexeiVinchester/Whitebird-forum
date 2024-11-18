@@ -13,9 +13,9 @@ const PostsList = ({ selectedUserId, apiUsers }: IPostsList) => {
         posts,
         isLoadingPosts,
         currentUser,
-        handleClickDeletePost,
-        handleClickLike,
-        handleClickSavePost
+        deletePost,
+        likePost,
+        savePost
     } = usePosts(selectedUserId);
 
     if (isLoadingPosts) {
@@ -29,9 +29,9 @@ const PostsList = ({ selectedUserId, apiUsers }: IPostsList) => {
                 post={post}
                 currentUserId={currentUser.id}
                 apiUsers={apiUsers as IApiUser[]}
-                handleClickDeletePost={handleClickDeletePost}
-                handleClickLike={handleClickLike}
-                handleClickSavePost={handleClickSavePost}
+                deletePost={deletePost}
+                likePost={likePost}
+                savePost={savePost}
             />
 
         ))

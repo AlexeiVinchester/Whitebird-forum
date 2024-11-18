@@ -3,21 +3,22 @@ import { selectIsAuthorisedUser } from "../../features/authorisedUser/authorised
 import { loadApiPosts } from "../../pages/PostsPage/loadApiPosts.service";
 import { ICustomPost } from "../../types/post.interface";
 import { useLoadData } from "../../hooks/useLoadData";
+import { useCallback } from "react";
 
 export const usePosts = (selectedUserId: number | null) => {
     const currentUser = useSelector(selectIsAuthorisedUser);
-    const { 
-        isLoading: isLoadingPosts, 
+    const {
+        isLoading: isLoadingPosts,
         apiData: posts,
-        setApiData: setPosts 
+        setApiData: setPosts
     } = useLoadData<ICustomPost[], number | null>(loadApiPosts, selectedUserId);
 
-    const handleClickDeletePost = (id: number) => {
+    const deletePost = useCallback((id: number) => {
         setPosts((prevPosts) => prevPosts?.filter(
             (post) => post.id !== id) as ICustomPost[]);
-    };
+    }, [setPosts]);
 
-    const handleClickLike = (id: number) => {
+    const likePost = useCallback((id: number) => {
         setPosts((prevPosts) => prevPosts?.map(
             (post) => {
                 if (post.id === id) {
@@ -30,9 +31,9 @@ export const usePosts = (selectedUserId: number | null) => {
                 }
             }
         ) as ICustomPost[]);
-    };
+    }, [setPosts]);
 
-    const handleClickSavePost = (id: number) => {
+    const savePost = useCallback((id: number) => {
         setPosts((prevPosts) => prevPosts?.map(
             (post) => {
                 if (post.id === id) {
@@ -45,14 +46,14 @@ export const usePosts = (selectedUserId: number | null) => {
                 }
             }
         ) as ICustomPost[]);
-    };
+    }, [setPosts]);
 
     return {
         posts,
         isLoadingPosts,
         currentUser,
-        handleClickDeletePost,
-        handleClickLike,
-        handleClickSavePost
+        deletePost,
+        likePost,
+        savePost
     };
 };
