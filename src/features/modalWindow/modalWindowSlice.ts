@@ -11,15 +11,13 @@ const modalWindowSlice = createSlice({
     name: 'modalWindow',
     initialState: initialModalWindowState,
     reducers: {
-        openModalWindow: <T extends keyof IModalWindowData>(state: IModalWindow, action: PayloadAction<{type: T, data: IModalWindowData[T]}>) => {
+        openModalWindow: <T extends keyof IModalWindowData>(state: IModalWindow, action: PayloadAction<{ type: T, data: IModalWindowData[T] }>) => {
             state.isOpen = true;
             state.type = action.payload.type;
             state.data = action.payload.data;
         },
-        closeModalWindow(state) {
-            state.isOpen = false;
-            state.type = null;
-            state.data = null;
+        closeModalWindow() {
+            return { ...initialModalWindowState };
         }
     }
 });
