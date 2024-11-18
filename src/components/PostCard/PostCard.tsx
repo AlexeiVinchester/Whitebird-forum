@@ -13,15 +13,15 @@ interface IPostCard {
     postId: string;
     postAuthorName: string;
     currentUserId: number;
+    post: ICustomPost;
+    isAuthorised: boolean;
+    isShowComments?: boolean;
     handleClickDelete: () => void;
     handleClickLike: () => void;
     handleClickSave: () => void;
-    handleClickAllPosts: () => void;
-    post: ICustomPost;
-    isAuthorised: boolean;
-    handleClickComments?: () => Promise<void>;
-    isShowComments: boolean;
+    handleClickAllPosts?: () => void;
     handleClickOpen?: () => void;
+    handleClickComments?: () => Promise<void>;
 };
 
 export const PostCard = ({
@@ -37,7 +37,6 @@ export const PostCard = ({
     handleClickComments,
     isShowComments,
     handleClickOpen
-
 }: IPostCard) => {
     return (
         <Card
@@ -109,7 +108,7 @@ export const PostCard = ({
                                     <CommentIcon />
                                 </StyledIconButton>
                                 <StyledIconButton
-                                    onClick={handleClickAllPosts}
+                                    onClick={handleClickAllPosts as () => void}
                                     value="All posts"
                                 >
                                     <ArrowBackIcon />
