@@ -5,6 +5,8 @@ import { PostsList } from "../../components/PostsList/PostsList";
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import { IconButton } from "@mui/material";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
+import { useModal } from "../../hooks/useModal";
+import { ModalWindow } from "../../layouts/ModalWindow/ModalWindow";
 
 const PostsPage = () => {
     const {
@@ -16,12 +18,14 @@ const PostsPage = () => {
 
     const isAuthorised = useCurrentUser().isAuthorised;
 
+    const { isOpen, open, close } = useModal();
+
     if (isLoadingUsers) {
         return <Spinner />
     }
 
     const handleClickAdd = () => {
-
+        open();
     }
 
     return (
@@ -53,6 +57,10 @@ const PostsPage = () => {
                     </IconButton>}
             </div>
             <PostsList apiUsers={apiUsers as IApiUser[]} selectedUserId={selectedUserId} />
+            {isOpen &&
+                <ModalWindow isOpen={isOpen} closeModal={close}>
+                    <></>
+                </ModalWindow>}
         </div>
     );
 };
