@@ -1,4 +1,7 @@
+import { IModalWindowData } from "../features/modalWindow/modalWindowSlice";
+
 export interface IModalWindow {
     isOpen: boolean;
-    element: React.ReactNode | null;
+    type: keyof IModalWindowData | null;
+    data: IModalWindowData[keyof IModalWindowData] | null;
 };

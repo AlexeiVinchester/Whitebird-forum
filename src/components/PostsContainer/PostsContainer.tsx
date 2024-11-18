@@ -3,7 +3,6 @@ import { IApiUser } from "../../types/user.interface";
 import { usePosts } from "./usePosts";
 import { StyledIconButton } from "../StyledIconButton/StyledIconButton";
 import PostAddIcon from '@mui/icons-material/PostAdd';
-import { AddPostForm } from "../AddPostForm/AddPostForm";
 import { ICustomPost } from "../../types/post.interface";
 import { openModalWindow } from "../../features/modalWindow/modalWindowSlice";
 import { ModalWindow } from "../../layouts/ModalWindow/ModalWindow";
@@ -36,12 +35,14 @@ const PostsContainer = ({ selectedUserId, apiUsers }: IPostsContainer) => {
     const handleClickAdd = () => {
         const maxId = getMaxPotId(posts as ICustomPost[]);
         dispatch(openModalWindow(
-            <AddPostForm
-                selectedUserId={selectedUserId}
-                lastPostId={maxId}
-                addPost={addNewPost}
-            />
-        ));
+            {
+                type: 'ADD_POST',
+                data: {
+                    selectedUserId,
+                    lastPostId: maxId,
+                    addPost: addNewPost
+                }
+            }));
     };
 
     if (isLoadingPosts) {

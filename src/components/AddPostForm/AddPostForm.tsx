@@ -2,8 +2,7 @@ import { Card, CardContent, Typography, TextField, CardActions, Button } from "@
 import { ICustomPost } from "../../types/post.interface";
 import { useCreateNewPost } from "./useCreateNewPost";
 
-
-interface IAddPostForm {
+export interface IAddPostForm {
     lastPostId: number;
     addPost: (post: ICustomPost) => void;
     selectedUserId: number | null;
