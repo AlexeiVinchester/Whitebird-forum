@@ -26,20 +26,27 @@ const PostsContainer = ({ selectedUserId, apiUsers }: IPostsContainer) => {
 
     return (
         <>
-            <AddNewPostButton
-                setPosts={setPosts}
-                posts={posts}
-                selectedUserId={selectedUserId}
-                isAuthorised={currentUser.isAuthorised}
-            />
-            <PostsList
-                posts={posts}
-                currentUserId={currentUser.id}
-                apiUsers={apiUsers as IApiUser[]}
-                deletePost={deletePost}
-                likePost={likePost}
-                savePost={savePost}
-            />
+            {
+                posts ?
+                    <>
+                        <AddNewPostButton
+                            setPosts={setPosts}
+                            posts={posts}
+                            selectedUserId={selectedUserId}
+                            isAuthorised={currentUser.isAuthorised}
+                        />
+                        <PostsList
+                            posts={posts}
+                            currentUserId={currentUser.id}
+                            apiUsers={apiUsers as IApiUser[]}
+                            deletePost={deletePost}
+                            likePost={likePost}
+                            savePost={savePost}
+                        />
+                    </>
+                    :
+                    <p>Yoooops</p>
+            }
         </>
     );
 };

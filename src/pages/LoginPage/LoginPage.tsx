@@ -12,11 +12,13 @@ const LoginPage = () => {
 
     return (
         <>
-            {apiUsers && (
-                <div className="flex justify-center items-center min-h-[calc(100vh-240px)]">
-                    <LoginForm users={apiUsers} />
-                </div>
-            )}
+            {apiUsers ?
+                (
+                    <div className="flex justify-center items-center min-h-[calc(100vh-240px)]">
+                        <LoginForm users={apiUsers} />
+                    </div>
+                ) :
+                <p>Yooops</p>}
         </>
     );
 };

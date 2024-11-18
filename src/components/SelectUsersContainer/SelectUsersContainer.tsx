@@ -14,7 +14,7 @@ export const SelectUsersContainer = ({ handleChangeSelect, apiUsers }: ISelectUs
             >
                 <option value="">All</option>
                 {
-                    apiUsers?.map(user => (
+                    apiUsers.map(user => (
                         <option
                             key={user.id}
                             value={user.id}

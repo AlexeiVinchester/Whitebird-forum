@@ -12,8 +12,14 @@ const SinglePostPage = () => {
     }
 
     return (
-        <SinglePostCard apiUsers={apiUsers}/>
-    );
+        <>
+            {
+                apiUsers ?
+                    <SinglePostCard apiUsers={apiUsers} /> :
+                    <p>Yooops</p>
+            }
+        </>);
+
 };
 
 export { SinglePostPage };

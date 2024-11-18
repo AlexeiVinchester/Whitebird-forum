@@ -14,7 +14,7 @@ import CommentIcon from '@mui/icons-material/Comment';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 interface ISinglePostCard {
-    apiUsers: IApiUser[] | null;
+    apiUsers: IApiUser[];
 };
 
 const SinglePostCard = ({ apiUsers }: ISinglePostCard) => {
