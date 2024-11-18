@@ -7,11 +7,10 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { ICustomPost } from "../../types/post.interface";
 import { getUserNameById } from "../../utils/logInHeplers";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectIsAuthorisedFlag } from "../../features/authorisedUser/authorisedUserSelectors";
 import { useCallback, useMemo } from "react";
 import React from "react";
 import { StyledIconButton } from "../StyledIconButton/StyledIconButton";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
 
 interface IPostCard {
     post: ICustomPost;
@@ -22,7 +21,7 @@ interface IPostCard {
     savePost: (id: number) => void;
 };
 
-const PostCard = React.memo(({ post, currentUserId, apiUsers, deletePost, likePost, savePost }: IPostCard) => {
+const PostCardContainer = React.memo(({ post, currentUserId, apiUsers, deletePost, likePost, savePost }: IPostCard) => {
     const {
         id: postId,
         userId: postUserId,
@@ -36,7 +35,7 @@ const PostCard = React.memo(({ post, currentUserId, apiUsers, deletePost, likePo
         navigate(`/posts/${postId}`);
     }, [navigate, postId]);
 
-    const isAuthorised = useSelector(selectIsAuthorisedFlag);
+    const isAuthorised = useCurrentUser().isAuthorised;
 
     const postAuthorName = useMemo(() => {
         return getUserNameById(apiUsers as IApiUser[], postUserId);
@@ -114,7 +113,6 @@ const PostCard = React.memo(({ post, currentUserId, apiUsers, deletePost, likePo
                             <BookmarkIcon />
                         </StyledIconButton>
                     </>}
-
                     <StyledIconButton
                         onClick={handleClickOpen}
                     >
@@ -126,4 +124,4 @@ const PostCard = React.memo(({ post, currentUserId, apiUsers, deletePost, likePo
     );
 });
 
-export { PostCard }; 
+export { PostCardContainer }; 

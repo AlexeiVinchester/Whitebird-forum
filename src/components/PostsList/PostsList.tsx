@@ -1,6 +1,6 @@
 import { Spinner } from "../Spinner/Spinner";
 import { IApiUser } from "../../types/user.interface";
-import { PostCard } from "../PostCard/PostCard";
+import { PostCardContainer } from "../PostCardContainer/PostCardContainer";
 import { usePosts } from "./usePosts";
 
 interface IPostsList {
@@ -24,7 +24,7 @@ const PostsList = ({ selectedUserId, apiUsers }: IPostsList) => {
 
     return (
         posts?.map(post => (
-            <PostCard
+            <PostCardContainer
                 key={post.id}
                 post={post}
                 currentUserId={currentUser.id}
@@ -33,7 +33,6 @@ const PostsList = ({ selectedUserId, apiUsers }: IPostsList) => {
                 likePost={likePost}
                 savePost={savePost}
             />
-
         ))
     );
 };
