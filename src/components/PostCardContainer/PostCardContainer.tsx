@@ -107,7 +107,6 @@ const PostCardContainer = React.memo(({ post, currentUserId, apiUsers, deletePos
                         <StyledIconButton
                             onClick={handleClickSavePost}
                             clickFlag={isSaved}
-                            color='text-yellow-400'
                             value="Save"
                         >
                             <BookmarkIcon />

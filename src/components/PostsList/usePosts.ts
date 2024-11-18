@@ -54,6 +54,7 @@ export const usePosts = (selectedUserId: number | null) => {
         currentUser,
         deletePost,
         likePost,
-        savePost
+        savePost,
+        setPosts
     };
 };

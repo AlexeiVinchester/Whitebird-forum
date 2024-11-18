@@ -89,7 +89,6 @@ const SinglePostCard = ({ apiUsers }: ISinglePostCard) => {
                             <StyledIconButton
                                 onClick={handleClickSave}
                                 clickFlag={post.isSaved}
-                                color='text-yellow-400'
                                 value="Save"
                             >
                                 <BookmarkIcon />

@@ -8,11 +8,15 @@ interface IModalWindow {
 };
 
 const ModalWindow = ({ isOpen, closeModal, children }: IModalWindow) => {
-
     return (
-        <Dialog open={isOpen} onClose={closeModal}>
-            <IconButton sx={{ position: 'absolute', right: '5px', top: '5px' }} onClick={closeModal} ><CloseIcon /></IconButton>
-        
+        <Dialog open={isOpen}>
+            <IconButton
+                className="!absolute right-2 top-2 !text-basic-color"
+                onClick={closeModal}
+            >
+                <CloseIcon />
+            </IconButton>
+
             {children}
         </Dialog>
     );

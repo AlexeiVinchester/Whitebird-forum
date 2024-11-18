@@ -2,11 +2,6 @@ import { Spinner } from "../../components/Spinner/Spinner";
 import { useSelectedUsers } from "./useSelectedUsers";
 import { IApiUser } from "../../types/user.interface";
 import { PostsList } from "../../components/PostsList/PostsList";
-import PostAddIcon from '@mui/icons-material/PostAdd';
-import { IconButton } from "@mui/material";
-import { useCurrentUser } from "../../hooks/useCurrentUser";
-import { useModal } from "../../hooks/useModal";
-import { ModalWindow } from "../../layouts/ModalWindow/ModalWindow";
 
 const PostsPage = () => {
     const {
@@ -16,20 +11,12 @@ const PostsPage = () => {
         apiUsers
     } = useSelectedUsers();
 
-    const isAuthorised = useCurrentUser().isAuthorised;
-
-    const { isOpen, open, close } = useModal();
-
     if (isLoadingUsers) {
         return <Spinner />
     }
 
-    const handleClickAdd = () => {
-        open();
-    }
-
     return (
-        <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-col items-center">
             <div className="flex justify-center items-center mb-2">
                 <select
                     className="rounded-[22px] p-2 border-2 focus:border-none bg-back-side-statistics  border-basic-color"
@@ -47,20 +34,8 @@ const PostsPage = () => {
                         ))
                     }
                 </select>
-                {isAuthorised &&
-                    <IconButton
-                        onClick={handleClickAdd}
-                        value="Add new post"
-
-                    >
-                        <PostAddIcon fontSize="large" className="!text-basic-color" />
-                    </IconButton>}
             </div>
             <PostsList apiUsers={apiUsers as IApiUser[]} selectedUserId={selectedUserId} />
-            {isOpen &&
-                <ModalWindow isOpen={isOpen} closeModal={close}>
-                    <></>
-                </ModalWindow>}
         </div>
     );
 };
