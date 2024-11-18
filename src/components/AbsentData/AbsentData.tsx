@@ -5,7 +5,7 @@ const AbsentData = () => {
     return (
         <Card
             variant="outlined"
-            className="!w-[50%] !shadow-[0_5px_20px_#ABB2B9] !rounded-[22px] !text-basic-color !py-8 "
+            className="!w-[200px] !shadow-[0_5px_20px_#ABB2B9] !rounded-[22px] !text-basic-color !py-8 "
         >
             <div className="flex items-center justify-center gap-1">
                 <ErrorIcon />
