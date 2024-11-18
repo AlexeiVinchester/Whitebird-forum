@@ -9,6 +9,7 @@ import { ModalWindow } from "../../layouts/ModalWindow/ModalWindow";
 import { useCallback } from "react";
 import { PostsList } from "../PostsList/PostsList";
 import { getMaxPotId } from "../../utils/postsHelpers";
+import { PostsContext } from "./usePostsContext";
 
 interface IPostsContainer {
     selectedUserId: number | null;
@@ -40,7 +41,6 @@ const PostsContainer = ({ selectedUserId, apiUsers }: IPostsContainer) => {
                 data: {
                     selectedUserId,
                     lastPostId: maxId,
-                    addPost: addNewPost
                 }
             }));
     };
@@ -68,7 +68,10 @@ const PostsContainer = ({ selectedUserId, apiUsers }: IPostsContainer) => {
                 likePost={likePost}
                 savePost={savePost}
             />
-            <ModalWindow />
+            <PostsContext.Provider value={addNewPost}>
+                <ModalWindow />
+            </PostsContext.Provider>
+
         </>
     );
 };

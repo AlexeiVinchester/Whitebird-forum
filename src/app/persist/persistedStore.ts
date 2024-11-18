@@ -15,8 +15,6 @@ export const store = configureStore({
       getDefaultMiddleware({
           serializableCheck: {
               ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, 'modalWindow/openModalWindow'],
-              ignoredActionPaths: ['payload.data'],
-              ignoredPaths: ['modalWindow.data'],
           },
       }),
         
