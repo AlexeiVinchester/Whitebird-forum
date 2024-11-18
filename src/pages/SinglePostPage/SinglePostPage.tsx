@@ -17,10 +17,10 @@ const SinglePostPage = () => {
             {
                 apiUsers ?
                     <SinglePostCard apiUsers={apiUsers} /> :
-                    <AbsentData title="No users"/>
+                    <AbsentData title="No users" />
             }
-        </>);
-
+        </>
+    );
 };
 
 export { SinglePostPage };

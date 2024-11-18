@@ -35,7 +35,6 @@ const ModalWindow = () => {
             >
                 <CloseIcon />
             </IconButton>
-
             {content}
         </Dialog>
     );

@@ -24,7 +24,7 @@ interface IPostCard {
     handleClickComments?: () => Promise<void>;
 };
 
-export const PostCard = ({
+const PostCard = ({
     postAuthorName,
     currentUserId,
     handleClickAllPosts,
@@ -37,7 +37,8 @@ export const PostCard = ({
     isShowComments,
     handleClickOpen
 }: IPostCard) => {
-    const {postId} = useParams();
+    const { postId } = useParams();
+
     return (
         <Card
             variant="outlined"
@@ -133,4 +134,6 @@ export const PostCard = ({
             }
         </Card>
     );
-}
+};
+
+export { PostCard };

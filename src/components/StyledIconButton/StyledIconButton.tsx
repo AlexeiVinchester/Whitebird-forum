@@ -5,7 +5,7 @@ export interface IStyledIconButton {
     value?: string;
     children: React.ReactNode;
     onClick: () => void;
-    color?: string
+    color?: string;
 };
 
 const StyledIconButton = ({

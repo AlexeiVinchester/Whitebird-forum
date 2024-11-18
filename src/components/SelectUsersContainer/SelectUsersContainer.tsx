@@ -3,7 +3,7 @@ import { IApiUser } from "../../types/user.interface";
 interface ISelectUsersContainer {
     handleChangeSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
     apiUsers: IApiUser[];
-}
+};
 
 export const SelectUsersContainer = ({ handleChangeSelect, apiUsers }: ISelectUsersContainer) => {
     return (

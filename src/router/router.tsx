@@ -17,7 +17,7 @@ const router = createBrowserRouter(
                 </AuthProvider>} />
             <Route path="/posts/:postId" element={<SinglePostPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="*" element={<AbsentData title="Not found page!"/>} />
+            <Route path="*" element={<AbsentData title="Not found page!" />} />
         </Route>
     ),
     {
