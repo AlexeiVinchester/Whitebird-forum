@@ -30,7 +30,7 @@ export const PostsList = React.memo(({ posts, currentUserId, apiUsers, deletePos
                     />
                 ))
                 :
-                <AbsentData />
+                <AbsentData title="No posts"/>
             }
         </div>
     );

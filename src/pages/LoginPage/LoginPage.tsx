@@ -20,7 +20,7 @@ const LoginPage = () => {
                             <LoginForm users={apiUsers} />
                         </div>
                     ) :
-                    <AbsentData />
+                    <AbsentData title="No users"/>
             }
         </>
     );

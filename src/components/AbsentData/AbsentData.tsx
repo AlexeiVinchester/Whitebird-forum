@@ -1,7 +1,11 @@
 import { Card } from "@mui/material"
 import ErrorIcon from '@mui/icons-material/Error';
 
-const AbsentData = () => {
+interface IAbsentData {
+    title?: string;
+};
+
+const AbsentData = ({title}: IAbsentData) => {
     return (
         <Card
             variant="outlined"
@@ -9,9 +13,9 @@ const AbsentData = () => {
         >
             <div className="flex items-center justify-center gap-1">
                 <ErrorIcon />
-                <p>Yooops!</p>
+                <p>Yooops</p>
             </div>
-            <p className="text-center">There are no data!</p>
+            <p className="text-center">{title || 'There are no data!'}</p>
         </Card>
     );
 };

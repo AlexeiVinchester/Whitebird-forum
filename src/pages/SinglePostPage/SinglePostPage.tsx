@@ -17,7 +17,7 @@ const SinglePostPage = () => {
             {
                 apiUsers ?
                     <SinglePostCard apiUsers={apiUsers} /> :
-                    <AbsentData />
+                    <AbsentData title="No users"/>
             }
         </>);
 

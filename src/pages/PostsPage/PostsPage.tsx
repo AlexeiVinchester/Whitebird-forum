@@ -25,7 +25,7 @@ const PostsPage = () => {
                         <PostsContainer apiUsers={apiUsers} selectedUserId={selectedUserId} />
                     </div>
                     :
-                    <AbsentData />
+                    <AbsentData title="No users"/>
             }
         </>
     );

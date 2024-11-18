@@ -5,6 +5,7 @@ import { ProfilePage } from "../pages/ProfilePage/ProfilePage";
 import { SinglePostPage } from "../pages/SinglePostPage/SinglePostPage";
 import { LoginPage } from "../pages/LoginPage/LoginPage";
 import { AuthProvider } from "../layouts/AuthProvider/AuthProvider";
+import { AbsentData } from "../components/AbsentData/AbsentData";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
                 </AuthProvider>} />
             <Route path="/posts/:postId" element={<SinglePostPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="*" element={<AbsentData title="Not found page!"/>} />
         </Route>
     ),
     {
