@@ -3,6 +3,7 @@ import { IApiUser } from "../../types/user.interface";
 import { usePosts } from "./usePosts";
 import { PostsList } from "../PostsList/PostsList";
 import { AddNewPostButton } from "../AddNewPostButton/AddNewPostButton";
+import { AbsentData } from "../AbsentData/AbsentData";
 
 interface IPostsContainer {
     selectedUserId: number | null;
@@ -38,14 +39,14 @@ const PostsContainer = ({ selectedUserId, apiUsers }: IPostsContainer) => {
                         <PostsList
                             posts={posts}
                             currentUserId={currentUser.id}
-                            apiUsers={apiUsers as IApiUser[]}
+                            apiUsers={apiUsers}
                             deletePost={deletePost}
                             likePost={likePost}
                             savePost={savePost}
                         />
                     </>
                     :
-                    <p>Yoooops</p>
+                    <AbsentData />
             }
         </>
     );

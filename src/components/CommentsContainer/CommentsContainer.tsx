@@ -3,6 +3,7 @@ import { Spinner } from "../Spinner/Spinner";
 import { AddCommentContainer } from "../AddCommentContainer/AddCommentContainer";
 import React from "react";
 import { useComments } from "./useComments";
+import { AbsentData } from "../AbsentData/AbsentData";
 
 interface ICommentsContainer {
     postId: string | undefined;
@@ -22,7 +23,7 @@ const CommentsContainer = React.memo(({ postId }: ICommentsContainer) => {
                 <CommentsList comments={comments} />
             </>
             :
-            <p>No comments available.</p>
+            <AbsentData />
     );
 });
 

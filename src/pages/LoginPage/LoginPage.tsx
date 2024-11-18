@@ -1,3 +1,4 @@
+import { AbsentData } from "../../components/AbsentData/AbsentData";
 import { LoginForm } from "../../components/LoginForm/LoginForm";
 import { Spinner } from "../../components/Spinner/Spinner";
 import { useLoadData } from "../../hooks/useLoadData";
@@ -12,13 +13,15 @@ const LoginPage = () => {
 
     return (
         <>
-            {apiUsers ?
-                (
-                    <div className="flex justify-center items-center min-h-[calc(100vh-240px)]">
-                        <LoginForm users={apiUsers} />
-                    </div>
-                ) :
-                <p>Yooops</p>}
+            {
+                apiUsers ?
+                    (
+                        <div className="flex justify-center items-center min-h-[calc(100vh-240px)]">
+                            <LoginForm users={apiUsers} />
+                        </div>
+                    ) :
+                    <AbsentData />
+            }
         </>
     );
 };

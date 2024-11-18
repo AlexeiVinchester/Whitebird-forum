@@ -12,6 +12,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CommentIcon from '@mui/icons-material/Comment';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { AbsentData } from "../AbsentData/AbsentData";
 
 interface ISinglePostCard {
     apiUsers: IApiUser[];
@@ -116,7 +117,7 @@ const SinglePostCard = ({ apiUsers }: ISinglePostCard) => {
                 }
             </Card>
             :
-            (<p>Post was deleted</p>)
+            (<AbsentData />)
     );
 };
 

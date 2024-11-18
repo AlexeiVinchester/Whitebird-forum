@@ -2,6 +2,7 @@ import { Spinner } from "../../components/Spinner/Spinner";
 import { useSelectedUsers } from "./useSelectedUsers";
 import { PostsContainer } from "../../components/PostsContainer/PostsContainer";
 import { SelectUsersContainer } from "../../components/SelectUsersContainer/SelectUsersContainer";
+import { AbsentData } from "../../components/AbsentData/AbsentData";
 
 const PostsPage = () => {
     const {
@@ -24,7 +25,7 @@ const PostsPage = () => {
                         <PostsContainer apiUsers={apiUsers} selectedUserId={selectedUserId} />
                     </div>
                     :
-                    <h1>Yooops</h1>
+                    <AbsentData />
             }
         </>
     );

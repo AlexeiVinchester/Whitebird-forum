@@ -3,6 +3,7 @@ import { useLoadData } from "../../hooks/useLoadData";
 import { loadApiUsers } from "../../services/loadApiUsers";
 import { Spinner } from "../../components/Spinner/Spinner";
 import { SinglePostCard } from "../../components/SinglePostCard/SinglePostCard";
+import { AbsentData } from "../../components/AbsentData/AbsentData";
 
 const SinglePostPage = () => {
     const { isLoading: isLoadingUsers, apiData: apiUsers } = useLoadData<IApiUser[]>(loadApiUsers);
@@ -16,7 +17,7 @@ const SinglePostPage = () => {
             {
                 apiUsers ?
                     <SinglePostCard apiUsers={apiUsers} /> :
-                    <p>Yooops</p>
+                    <AbsentData />
             }
         </>);
 

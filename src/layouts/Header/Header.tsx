@@ -13,7 +13,7 @@ const Header = () => {
                     <li className="absolute left-1/2 transform -translate-x-1/2">
                         <Link to="/posts">
                             <Typography className="!text-[32px] !font-medium !text-[rgb(0,105,255)]">
-                                Whitebird Forum Posts
+                                Posts
                             </Typography>
                         </Link>
                     </li>
