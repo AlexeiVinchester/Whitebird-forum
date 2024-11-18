@@ -11,7 +11,7 @@ import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { useNavigateToSinglePost } from "./useNavigateToSinglePost";
 import { usePost } from "./usePost";
 
-export interface IPostCard {
+export interface IPostCardContainer {
     post: ICustomPost;
     currentUserId: number;
     apiUsers: IApiUser[];
@@ -20,21 +20,16 @@ export interface IPostCard {
     savePost: (id: number) => void;
 };
 
-const PostCardContainer = React.memo((props: IPostCard) => {
+const PostCardContainer = React.memo((props: IPostCardContainer) => {
     const {
-        id,
-        userId,
-        title,
-        body,
-        isLiked,
-        isSaved,
+        post,
         postAuthorName,
         handleClickDeletePost,
         handleClickLikePost,
         handleClickSavePost
     } = usePost(props);
 
-    const handleClickOpen = useNavigateToSinglePost(id);
+    const handleClickOpen = useNavigateToSinglePost(post.id);
 
     const isAuthorised = useCurrentUser().isAuthorised;
 
@@ -57,7 +52,7 @@ const PostCardContainer = React.memo((props: IPostCard) => {
                         </h3>}
                 />
                 {
-                    props.currentUserId === userId &&
+                    props.currentUserId === post.userId &&
                     <IconButton
                         className="!relative !right-2 !h-full !top-3"
                         onClick={handleClickDeletePost}
@@ -70,12 +65,12 @@ const PostCardContainer = React.memo((props: IPostCard) => {
             <CardContent>
                 <div className="flex items-center mb-2 gap-2">
                     <Typography variant="h4" component="p">
-                        {title}
+                        {post.title}
                     </Typography>
                 </div>
                 <Divider />
                 <Typography variant="h6" component="p">
-                    {body}
+                    {post.body}
                 </Typography>
             </CardContent>
 
@@ -85,13 +80,13 @@ const PostCardContainer = React.memo((props: IPostCard) => {
                         <StyledIconButton
                             onClick={handleClickLikePost}
                             value="Like"
-                            clickFlag={isLiked}
+                            clickFlag={post.isLiked}
                         >
                             <ThumbUpAltIcon />
                         </StyledIconButton>
                         <StyledIconButton
                             onClick={handleClickSavePost}
-                            clickFlag={isSaved}
+                            clickFlag={post.isSaved}
                             value="Save"
                         >
                             <BookmarkIcon />

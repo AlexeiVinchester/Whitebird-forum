@@ -14,7 +14,6 @@ interface IPostsList {
 };
 
 export const PostsList = React.memo(({ posts, currentUserId, apiUsers, deletePost, likePost, savePost }: IPostsList) => {
-    console.log(posts)
     return (
         <div className="mt-2 flex flex-col items-center gap-8">
             {

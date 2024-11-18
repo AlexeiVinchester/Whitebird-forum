@@ -1,32 +1,27 @@
 import { useMemo, useCallback } from "react";
 import { IApiUser } from "../../types/user.interface";
 import { getUserNameById } from "../../utils/logInHeplers";
-import { IPostCard } from "./PostCardContainer";
+import { IPostCardContainer } from "./PostCardContainer";
 
-export const usePost = ({ post, apiUsers, deletePost, likePost, savePost }: IPostCard) => {
-    const {
-        id: postId,
-        userId: postUserId,
-    } = post;
-
+export const usePost = ({ post, apiUsers, deletePost, likePost, savePost }: IPostCardContainer) => {
     const postAuthorName = useMemo(() => {
-        return getUserNameById(apiUsers as IApiUser[], postUserId);
-    }, [apiUsers, postUserId]);
+        return getUserNameById(apiUsers as IApiUser[], post.userId);
+    }, [apiUsers, post.userId]);
 
     const handleClickDeletePost = useCallback(() => {
-        deletePost(postId);
-    }, [deletePost, postId]);
+        deletePost(post.id);
+    }, [deletePost, post.id]);
 
     const handleClickLikePost = useCallback(() => {
-        likePost(postId)
-    }, [likePost, postId]);
+        likePost(post.id)
+    }, [likePost, post.id]);
 
     const handleClickSavePost = useCallback(() => {
-        savePost(postId)
-    }, [savePost, postId]);
+        savePost(post.id)
+    }, [savePost, post.id]);
 
     return {
-        ...post,
+        post,
         postAuthorName,
         handleClickDeletePost,
         handleClickLikePost,
