@@ -4,7 +4,7 @@ import { Card, CardHeader, Avatar, IconButton, CardContent, Typography, Divider,
 import { CommentsContainer } from "../CommentsContainer/CommentsContainer";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { useComments } from "./useComments";
-import { usePost } from "./usePost";
+import { useSinglePost } from "./useSinglePost";
 import { useNavigation } from "./useNavigation";
 import { StyledIconButton } from "../StyledIconButton/StyledIconButton";
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
@@ -29,7 +29,7 @@ const SinglePostCard = ({ apiUsers }: ISinglePostCard) => {
         handleClickDelete,
         handleClickSave,
         handleClickLike
-    } = usePost(postId, apiUsers);
+    } = useSinglePost(postId, apiUsers);
 
     if (isLoadingPost) {
         return <Spinner />

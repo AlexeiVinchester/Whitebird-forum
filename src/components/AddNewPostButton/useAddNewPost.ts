@@ -13,7 +13,8 @@ export const useAddNewPost = ({ setPosts, posts, selectedUserId }: IAddNewPostBu
     }, [setPosts]);
 
     const handleClickAdd = () => {
-        const maxId = getMaxPotId(posts as ICustomPost[]);
+        const maxId = getMaxPotId(posts as ICustomPost[]) || 1;
+        console.log(`MaxId: ${!!maxId}`)
         dispatch(openModalWindow(
             {
                 type: 'ADD_POST',

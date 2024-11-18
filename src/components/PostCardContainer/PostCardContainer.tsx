@@ -5,14 +5,13 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import DeleteIcon from '@mui/icons-material/Delete';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { ICustomPost } from "../../types/post.interface";
-import { getUserNameById } from "../../utils/logInHeplers";
-import { useNavigate } from "react-router-dom";
-import { useCallback, useMemo } from "react";
 import React from "react";
 import { StyledIconButton } from "../StyledIconButton/StyledIconButton";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
+import { useNavigateToSinglePost } from "./useNavigateToSinglePost";
+import { usePost } from "./usePost";
 
-interface IPostCard {
+export interface IPostCard {
     post: ICustomPost;
     currentUserId: number;
     apiUsers: IApiUser[];
@@ -21,38 +20,23 @@ interface IPostCard {
     savePost: (id: number) => void;
 };
 
-const PostCardContainer = React.memo(({ post, currentUserId, apiUsers, deletePost, likePost, savePost }: IPostCard) => {
+const PostCardContainer = React.memo((props: IPostCard) => {
     const {
-        id: postId,
-        userId: postUserId,
+        id,
+        userId,
         title,
         body,
         isLiked,
-        isSaved
-    } = post;
+        isSaved,
+        postAuthorName,
+        handleClickDeletePost,
+        handleClickLikePost,
+        handleClickSavePost
+    } = usePost(props);
 
-    const navigate = useNavigate();
-    const handleClickOpen = useCallback(() => {
-        navigate(`/posts/${postId}`);
-    }, [navigate, postId]);
+    const handleClickOpen = useNavigateToSinglePost(id);
 
     const isAuthorised = useCurrentUser().isAuthorised;
-
-    const postAuthorName = useMemo(() => {
-        return getUserNameById(apiUsers as IApiUser[], postUserId);
-    }, [apiUsers, postUserId]);
-
-    const handleClickDeletePost = useCallback(() => {
-        deletePost(postId);
-    }, [deletePost, postId]);
-
-    const handleClickLikePost = useCallback(() => {
-        likePost(postId)
-    }, [likePost, postId]);
-
-    const handleClickSavePost = useCallback(() => {
-        savePost(postId)
-    }, [savePost, postId]);
 
     return (
         <Card
@@ -73,7 +57,7 @@ const PostCardContainer = React.memo(({ post, currentUserId, apiUsers, deletePos
                         </h3>}
                 />
                 {
-                    currentUserId === postUserId &&
+                    props.currentUserId === userId &&
                     <IconButton
                         className="!relative !right-2 !h-full !top-3"
                         onClick={handleClickDeletePost}

@@ -5,7 +5,7 @@ import { ICustomPost } from "../../types/post.interface";
 import { IApiUser } from "../../types/user.interface";
 import { getUserNameById } from "../../utils/logInHeplers";
 
-export const usePost = (postId: string | undefined, users: IApiUser[] | null) => {
+export const useSinglePost = (postId: string | undefined, users: IApiUser[] | null) => {
     const {
         isLoading: isLoadingPost,
         apiData: post,
