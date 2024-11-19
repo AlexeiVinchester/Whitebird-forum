@@ -3,7 +3,7 @@ import { ICustomPost } from "../../types/post.interface";
 import { useDispatch } from "react-redux";
 import { showErrorMessage } from "../../utils/snackMessageHelpers";
 
-export type IPostContext = {
+export interface IPostContext {
     addNewPost: (post: ICustomPost) => void;
     lastPostId: number;
     selectedUserId: number | null;

@@ -30,7 +30,6 @@ export const AddNewPostButton = (props: IAddNewPostButton) => {
             <StyledIconButton
                 onClick={handleClickAdd}
                 value="Add new post"
-
             >
                 <PostAddIcon fontSize="large" className="!text-basic-color" />
             </StyledIconButton>

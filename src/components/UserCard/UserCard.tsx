@@ -1,5 +1,5 @@
 import { Card, Divider, CardActions, CardContent } from "@mui/material";
-import { ICustomUser } from "../../types/user.interface";
+import { IApiUser, ICustomUser } from "../../types/user.interface";
 import { logOutAuthorisedUser } from "../../features/authorisedUser/authorisedUserSlice";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -16,6 +16,8 @@ interface IUserCard {
 };
 
 const UserCard = ({ user }: IUserCard) => {
+    const [userInfo, setUserInfo] = useState<IApiUser>(user);
+
     const dispatch = useDispatch();
     const { pathname } = useLocation();
     const isProfilePage = pathname === '/profile';
@@ -30,7 +32,7 @@ const UserCard = ({ user }: IUserCard) => {
         setShowFullInfo(!showFullInfo);
     };
 
-    const userInfo = useMemo(() => structureUserInfo(user), [user]);
+    const structuredUserInfo = useMemo(() => structureUserInfo(user), [user]);
 
     return (
         <Card
@@ -49,7 +51,7 @@ const UserCard = ({ user }: IUserCard) => {
             {showFullInfo &&
                 <CardContent>
                     {
-                        Object.values(userInfo).map(section => (
+                        Object.values(structuredUserInfo).map(section => (
                             <UserInfoSection
                                 key={section.title}
                                 title={section.title}
@@ -62,7 +64,10 @@ const UserCard = ({ user }: IUserCard) => {
             <Divider />
             <CardActions>
                 <div className="w-full flex flex-row justify-between items-center">
-                    <EditPostButton />
+                    <EditPostButton 
+                        userInfo={userInfo}
+                        setUserInfo={setUserInfo}
+                    />
                     {isProfilePage &&
                         <StyledIconButton
                             value='Log out'

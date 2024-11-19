@@ -6,10 +6,8 @@ import { useModal } from "../../hooks/useModal";
 import { IPostContext } from "../PostsContainer/usePostsContext";
 
 export const useAddNewPost = ({ setPosts, posts, selectedUserId }: IAddNewPostButton) => {
-    
     const { isOpen, open, close } = useModal();
-
-
+    
     const addNewPost = useCallback((post: ICustomPost) => {
         setPosts((prev) => [...prev || [], post]);
     }, [setPosts]);
