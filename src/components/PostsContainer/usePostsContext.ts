@@ -3,8 +3,12 @@ import { ICustomPost } from "../../types/post.interface";
 import { useDispatch } from "react-redux";
 import { showErrorMessage } from "../../utils/snackMessageHelpers";
 
-export type IPostContext = (post: ICustomPost) => void;
-
+export type IPostContext = {
+    addNewPost: (post: ICustomPost) => void;
+    lastPostId: number;
+    selectedUserId: number | null;
+    close: () => void;
+};
 
 export const PostsContext = createContext<IPostContext | undefined>(undefined);
 
@@ -16,5 +20,5 @@ export const usePostsContext = () => {
         dispatch(showErrorMessage(new Error('Invalid posts context!')))
     }
 
-    return context;
+    return context as IPostContext;
 };

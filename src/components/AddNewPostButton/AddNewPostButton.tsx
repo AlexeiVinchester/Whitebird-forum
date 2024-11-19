@@ -4,6 +4,7 @@ import { PostsContext } from "../PostsContainer/usePostsContext";
 import { StyledIconButton } from "../StyledIconButton/StyledIconButton";
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import { useAddNewPost } from "./useAddNewPost";
+import { AddPostForm } from "../AddPostForm/AddPostForm";
 
 export interface IAddNewPostButton {
     setPosts: React.Dispatch<React.SetStateAction<ICustomPost[] | null>>;
@@ -13,7 +14,12 @@ export interface IAddNewPostButton {
 };
 
 export const AddNewPostButton = (props: IAddNewPostButton) => {
-    const { addNewPost, handleClickAdd } = useAddNewPost(props);
+    const {  
+        handleClickAdd,
+        contextData,
+        isOpen,
+        close
+    } = useAddNewPost(props);
 
     if (!props.isAuthorised) {
         return null;
@@ -28,8 +34,10 @@ export const AddNewPostButton = (props: IAddNewPostButton) => {
             >
                 <PostAddIcon fontSize="large" className="!text-basic-color" />
             </StyledIconButton>
-            <PostsContext.Provider value={addNewPost}>
-                <ModalWindow />
+            <PostsContext.Provider value={contextData}>
+                <ModalWindow isOpen={isOpen} onClose={close}>
+                    <AddPostForm />
+                </ModalWindow>
             </PostsContext.Provider>
         </>
 

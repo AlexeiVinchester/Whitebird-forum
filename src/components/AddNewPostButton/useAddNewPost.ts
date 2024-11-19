@@ -1,31 +1,37 @@
 import { useCallback } from "react";
-import { useDispatch } from "react-redux";
-import { openModalWindow } from "../../features/modalWindow/modalWindowSlice";
 import { ICustomPost } from "../../types/post.interface";
 import { getMaxPotId } from "../../utils/postsHelpers";
 import { IAddNewPostButton } from "./AddNewPostButton";
+import { useModal } from "../../hooks/useModal";
+import { IPostContext } from "../PostsContainer/usePostsContext";
 
 export const useAddNewPost = ({ setPosts, posts, selectedUserId }: IAddNewPostButton) => {
-    const dispatch = useDispatch();
+    
+    const { isOpen, open, close } = useModal();
+
 
     const addNewPost = useCallback((post: ICustomPost) => {
         setPosts((prev) => [...prev || [], post]);
     }, [setPosts]);
 
+    const maxId = getMaxPotId(posts as ICustomPost[]) || 1;
+
     const handleClickAdd = () => {
-        const maxId = getMaxPotId(posts as ICustomPost[]) || 1;
-        dispatch(openModalWindow(
-            {
-                type: 'ADD_POST',
-                data: {
-                    selectedUserId,
-                    lastPostId: maxId,
-                }
-            }));
+        open();
     };
+
+    const contextData: IPostContext = {
+        addNewPost: addNewPost,
+        lastPostId: maxId,
+        selectedUserId,
+        close: close
+    }
 
     return {
         addNewPost,
-        handleClickAdd
+        handleClickAdd,
+        contextData,
+        isOpen, 
+        close
     };
 };

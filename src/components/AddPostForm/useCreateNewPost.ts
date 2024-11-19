@@ -1,14 +1,13 @@
 import { useState, useCallback } from "react";
-import { useDispatch } from "react-redux";
-import { closeModalWindow } from "../../features/modalWindow/modalWindowSlice";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { ICustomPost } from "../../types/post.interface";
+import { usePostsContext } from "../PostsContainer/usePostsContext";
 
-export const useCreateNewPost = (selectedUserId: number | null, lastPostId: number, addPost: (post: ICustomPost) => void) => {
+export const useCreateNewPost = () => {
+    const {addNewPost, selectedUserId, lastPostId, close} = usePostsContext();
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const userId = useCurrentUser().id;
-    const dispatch = useDispatch();
 
     const handleChangeTitle = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setTitle(e.target.value);
@@ -29,10 +28,10 @@ export const useCreateNewPost = (selectedUserId: number | null, lastPostId: numb
         };
 
         if (selectedUserId === userId || selectedUserId === null) {
-            addPost(newPost);
+            addNewPost(newPost);
         }
 
-        dispatch(closeModalWindow());
+        close();
     };
 
     return {

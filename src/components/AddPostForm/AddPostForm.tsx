@@ -1,21 +1,14 @@
 import { Card, CardContent, Typography, TextField, CardActions, Button } from "@mui/material";
 import { useCreateNewPost } from "./useCreateNewPost";
-import { IPostContext, usePostsContext } from "../PostsContainer/usePostsContext";
 
-export interface IAddPostForm {
-    lastPostId: number;
-    selectedUserId: number | null;
-};
-
-const AddPostForm = ({ lastPostId, selectedUserId }: IAddPostForm) => {
-    const addPost = usePostsContext();
+const AddPostForm = () => {
     const {
         title,
         body,
         handleChangeTitle,
         handleChangeBody,
         handleClickAddPost
-    } = useCreateNewPost(selectedUserId, lastPostId, addPost as IPostContext);
+    } = useCreateNewPost();
 
     return (
         <Card className="!w-[500px] !py-10 !px-6 !shadow-[0_5px_10px_#ABB2B9] !rounded-[16px]">
