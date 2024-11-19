@@ -7,23 +7,24 @@ import { LoginPage } from "../pages/LoginPage/LoginPage";
 import { AuthProvider } from "../layouts/AuthProvider/AuthProvider";
 import { AbsentData } from "../components/AbsentData/AbsentData";
 import { UsersPage } from "../pages/UsersPage/UsersPage";
+import { ROUTES } from "./routes";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" element={<BasicPage />}>
-            <Route path="/posts" element={<PostsPage />} />
-            <Route path="/profile" element={
+        <Route path={ROUTES.HOME} element={<BasicPage />}>
+            <Route path={ROUTES.POSTS} element={<PostsPage />} />
+            <Route path={ROUTES.PROFILE} element={
                 <AuthProvider>
                     <ProfilePage />
                 </AuthProvider>} />
-            <Route path="/posts/:postId" element={<SinglePostPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/users" element={
+            <Route path={ROUTES.POST_DETAIL} element={<SinglePostPage />} />
+            <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+            <Route path={ROUTES.USERS} element={
                 <AuthProvider>
                     <UsersPage />
                 </AuthProvider>}
             />
-            <Route path="*" element={<AbsentData title="Not found page!" />} />
+            <Route path={ROUTES.NOT_FOUND} element={<AbsentData title="Not found page!" />} />
         </Route>
     ),
     {

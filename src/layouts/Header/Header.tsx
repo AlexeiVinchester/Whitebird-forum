@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsAuthorisedUser } from "../../features/authorisedUser/authorisedUserSelectors";
 import { iconMap } from "../../share/iconsMap";
+import { ROUTES } from "../../router/routes";
 
 const Header = () => {
     const currentUser = useSelector(selectIsAuthorisedUser);
@@ -11,7 +12,7 @@ const Header = () => {
             <nav>
                 <ul className="flex justify-between items-center relative">
                     <li className="absolute left-1/2 transform -translate-x-1/2">
-                        <Link to="/posts">
+                        <Link to={ROUTES.POSTS}>
                             <Typography className="!text-[32px] !font-medium !text-[rgb(0,105,255)]">
                                 Posts
                             </Typography>
@@ -23,7 +24,7 @@ const Header = () => {
                                 {currentUser.name}
                             </span>
                         )}
-                        <Link to="/profile">
+                        <Link to={ROUTES.PROFILE}>
                             <IconButton>
                                 {iconMap.profilePage}
                             </IconButton>
