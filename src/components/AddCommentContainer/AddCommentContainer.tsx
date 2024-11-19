@@ -1,6 +1,6 @@
-import AddCommentIcon from '@mui/icons-material/AddComment';
 import { useNewComment } from "./useNewComment";
 import { StyledIconButton } from "../StyledIconButton/StyledIconButton";
+import { iconMap } from "../../share/iconsMap";
 
 interface IAddCommentContainer {
     onClick: (body: string) => void;
@@ -19,7 +19,7 @@ export const AddCommentContainer = ({ onClick }: IAddCommentContainer) => {
                 onChange={handleChange}
             />
             <StyledIconButton onClick={handleClickAdd}>
-                <AddCommentIcon fontSize="large" />
+                {iconMap.newComment}
             </StyledIconButton>
         </div>
     );

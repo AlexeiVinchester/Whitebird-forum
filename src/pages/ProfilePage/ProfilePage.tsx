@@ -1,8 +1,8 @@
 import { UserCard } from "../../components/UserCard/UserCard";
 import { useNavigate } from "react-router-dom";
 import { StyledIconButton } from "../../components/StyledIconButton/StyledIconButton";
-import GroupIcon from '@mui/icons-material/Group';
 import { useCurrentUser } from "../../hooks/useCurrentUser";
+import { iconMap } from "../../share/iconsMap";
 
 const ProfilePage = () => {
     const user = useCurrentUser();
@@ -18,10 +18,9 @@ const ProfilePage = () => {
                     value="All users"
                     clickFlag
                 >
-                    <GroupIcon />
+                    {iconMap.allUsersPage}
                 </StyledIconButton>
             }
-
             <UserCard user={user} />
         </>
 

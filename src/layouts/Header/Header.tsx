@@ -1,8 +1,8 @@
 import { Typography, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useSelector } from "react-redux";
 import { selectIsAuthorisedUser } from "../../features/authorisedUser/authorisedUserSelectors";
+import { iconMap } from "../../share/iconsMap";
 
 const Header = () => {
     const currentUser = useSelector(selectIsAuthorisedUser);
@@ -25,7 +25,7 @@ const Header = () => {
                         )}
                         <Link to="/profile">
                             <IconButton>
-                                <AccountCircleIcon className="!text-[40px] !text-[rgb(0,105,255)]" />
+                                {iconMap.profilePage}
                             </IconButton>
                         </Link>
                     </li>

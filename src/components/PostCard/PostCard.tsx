@@ -2,13 +2,8 @@ import { Card, CardHeader, Avatar, IconButton, CardContent, Typography, Divider,
 import { ICustomPost } from "../../types/post.interface";
 import { CommentsContainer } from "../CommentsContainer/CommentsContainer";
 import { StyledIconButton } from "../StyledIconButton/StyledIconButton";
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import CommentIcon from '@mui/icons-material/Comment';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { useParams } from "react-router-dom";
+import { iconMap } from "../../share/iconsMap";
 
 interface IPostCard {
     postAuthorName: string;
@@ -63,7 +58,7 @@ const PostCard = ({
                         className="!relative !right-2 !h-full !top-3"
                         onClick={handleClickDelete}
                     >
-                        <DeleteIcon />
+                        {iconMap.deletePost}
                     </IconButton>
                 }
             </div>
@@ -88,14 +83,14 @@ const PostCard = ({
                             value="Like"
                             clickFlag={post.isLiked}
                         >
-                            <ThumbUpAltIcon />
+                            {iconMap.likePost}
                         </StyledIconButton>
                         <StyledIconButton
                             onClick={handleClickSave}
                             clickFlag={post.isSaved}
                             value="Save"
                         >
-                            <BookmarkIcon />
+                            {iconMap.savePost}
                         </StyledIconButton>
                     </>}
                     {
@@ -106,20 +101,20 @@ const PostCard = ({
                                     value="Comments"
                                     clickFlag={isShowComments}
                                 >
-                                    <CommentIcon />
+                                    {iconMap.comments}
                                 </StyledIconButton>
                                 <StyledIconButton
                                     onClick={handleClickAllPosts as () => void}
                                     value="All posts"
                                 >
-                                    <ArrowBackIcon />
+                                    {iconMap.backToAllPosts}
                                 </StyledIconButton>
                             </>
                             :
                             <StyledIconButton
                                 onClick={handleClickOpen as () => void}
                             >
-                                <OpenInNewIcon />
+                                {iconMap.openPost}
                             </StyledIconButton>
                     }
                 </div>

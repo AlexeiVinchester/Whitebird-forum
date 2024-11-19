@@ -2,9 +2,9 @@ import { ModalWindow } from "../../layouts/ModalWindow/ModalWindow";
 import { ICustomPost } from "../../types/post.interface";
 import { PostsContext } from "../PostsContainer/usePostsContext";
 import { StyledIconButton } from "../StyledIconButton/StyledIconButton";
-import PostAddIcon from '@mui/icons-material/PostAdd';
 import { useAddNewPost } from "./useAddNewPost";
 import { AddPostForm } from "../AddPostForm/AddPostForm";
+import { iconMap } from "../../share/iconsMap";
 
 export interface IAddNewPostButton {
     setPosts: React.Dispatch<React.SetStateAction<ICustomPost[] | null>>;
@@ -31,7 +31,7 @@ export const AddNewPostButton = (props: IAddNewPostButton) => {
                 onClick={handleClickAdd}
                 value="Add new post"
             >
-                <PostAddIcon fontSize="large" className="!text-basic-color" />
+                {iconMap.addNewPost}
             </StyledIconButton>
             <PostsContext.Provider value={contextData}>
                 <ModalWindow isOpen={isOpen} onClose={close}>

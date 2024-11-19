@@ -13,6 +13,17 @@ import LanguageIcon from '@mui/icons-material/Language';
 import BusinessIcon from '@mui/icons-material/Business';
 import MicNoneIcon from '@mui/icons-material/MicNone';
 import HelpIcon from '@mui/icons-material/Help';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import CommentIcon from '@mui/icons-material/Comment';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddCommentIcon from '@mui/icons-material/AddComment';
+import GroupIcon from '@mui/icons-material/Group';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import ErrorIcon from '@mui/icons-material/Error';
 
 export const iconMap: Record<string, React.ReactElement> = {
     email: <EmailIcon />,
@@ -30,4 +41,15 @@ export const iconMap: Record<string, React.ReactElement> = {
     showFullInfo: <KeyboardArrowDownIcon />,
     hideFullInfo: <KeyboardArrowUpIcon />,
     admin: <AdminPanelSettingsIcon />,
+    openPost: <OpenInNewIcon />,
+    likePost: <ThumbUpAltIcon />,
+    savePost: <BookmarkIcon />,
+    backToAllPosts: <ArrowBackIcon />,
+    comments: <CommentIcon />,
+    deletePost: <DeleteIcon />,
+    newComment: <AddCommentIcon fontSize="large" />,
+    allUsersPage: <GroupIcon />,
+    profilePage: <AccountCircleIcon className="!text-[40px] !text-[rgb(0,105,255)]" />,
+    addNewPost: <PostAddIcon fontSize="large" className="!text-basic-color" />,
+    error: <ErrorIcon />
 };
