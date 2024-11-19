@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from "react";
 import { IApiUser } from "../../types/user.interface";
-import { getUserNameById } from "../../utils/logInHeplers";
+import { getUserNameById } from "../../utils/usersHeplers";
 import { IPostCardContainer } from "./PostCardContainer";
 
 export const usePost = ({ post, apiUsers, deletePost, likePost, savePost }: IPostCardContainer) => {

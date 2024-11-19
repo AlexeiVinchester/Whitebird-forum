@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { setNewAuthorisedUser } from "../../features/authorisedUser/authorisedUserSlice";
 import { IEmailData } from "../../types/emailData.interface";
 import { IApiUser, ICustomUser } from "../../types/user.interface";
-import { isEmailFormatValid, checkUsersInfo } from "../../utils/logInHeplers";
+import { isEmailFormatValid, checkUsersInfo } from "../../utils/usersHeplers";
 import { showSuccessMessage } from "../../utils/snackMessageHelpers";
 import { useNavigationBack } from "./useNavigateBack";
 

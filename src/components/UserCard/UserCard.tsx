@@ -1,12 +1,14 @@
-import { Card, CardHeader, Avatar, Divider, CardActions, CardContent, Typography } from "@mui/material";
+import { Card, CardHeader, Avatar, Divider, CardActions, CardContent } from "@mui/material";
 import { ICustomUser } from "../../types/user.interface";
 import { logOutAuthorisedUser } from "../../features/authorisedUser/authorisedUserSlice";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { StyledIconButton } from "../StyledIconButton/StyledIconButton";
 import { EditPostButton } from "../EditPostButton/EditPostButton";
 import { iconMap } from "../../share/iconsMap";
+import { structureUserInfo } from "../../utils/usersHeplers";
+import { UserInfoSection } from "../UserInfoSection/UserInfoSection";
 
 interface IUserCard {
     user: ICustomUser;
@@ -27,15 +29,12 @@ const UserCard = ({ user }: IUserCard) => {
         setShowFullInfo(!showFullInfo);
     };
 
+    const userInfo = useMemo(() => structureUserInfo(user), [user]);
+
     return (
         <Card
             variant="outlined"
-            sx={{
-                width: '90%',
-                boxShadow: '0 5px 20px #ABB2B9;',
-                borderRadius: '22px'
-            }}
-            className="relative"
+            className="!w-[70%] !shadow-[0_5px_20px_#ABB2B9] !rounded-[22px]"
         >
             <CardHeader
                 avatar={
@@ -71,70 +70,15 @@ const UserCard = ({ user }: IUserCard) => {
 
             {showFullInfo &&
                 <CardContent>
-                    <div className="flex flex-col mb-2">
-                        <Typography variant="h6" component="p" fontSize={18}>
-                            Personal contacts:
-                        </Typography>
-                        <Divider className="!mb-1" />
-                        <div className="flex items-center">
-                            {iconMap.email}
-                            <span className="ml-2">{user.email}</span>
-                        </div>
-                        <div className="flex items-center">
-                            {iconMap.phone}
-                            <span className="ml-2">{user.phone}</span>
-                        </div>
-                        <div className="flex items-center">
-                            {iconMap.website}
-                            <span className="ml-2">{user.website}</span>
-                        </div>
-                    </div>
-                    <div className="flex flex-col mb-2">
-                        <Typography variant="h6" component="p" fontSize={18}>
-                            Adress:
-                        </Typography>
-                        <Divider className="!mb-1" />
-                        <div className="flex items-center">
-                            {iconMap.street}
-                            <span className="ml-2">{user.address.street}</span>
-                        </div>
-                        <div className="flex items-center">
-                            {iconMap.suite}
-                            <span className="ml-2">{user.address.suite}</span>
-                        </div>
-                        <div className="flex items-center">
-                            {iconMap.city}
-                            <span className="ml-2">{user.address.city}</span>
-                        </div>
-                        <div className="flex items-center">
-                            {iconMap.zipcode}
-                            <span className="ml-2">{user.address.zipcode}</span>
-                        </div>
-                        <div className="flex items-center">
-                            {iconMap.geo}
-                            <span className="ml-2">
-                                lat: {user.address.geo.lat}, lng: {user.address.geo.lng}
-                            </span>
-                        </div>
-                    </div>
-                    <div className="flex flex-col mb-2">
-                        <Typography variant="h6" component="p" fontSize={18}>
-                            Company:
-                        </Typography>
-                        <Divider className="!mb-1" />
-                        <div className="flex items-center">
-                            {iconMap.companyName}
-                            <span className="ml-2">{user.company.name}</span>
-                        </div>
-                        <div className="flex items-center">
-                            {iconMap.companyCatchPhrase}
-                            <span className="ml-2">{user.company.catchPhrase}</span>
-                        </div>
-                        <div className="flex items-center">
-                            {iconMap.companyBs}
-                            <span className="ml-2">{user.company.bs}</span>
-                        </div>
-                    </div>
+                    {
+                        Object.values(userInfo).map(section => (
+                            <UserInfoSection
+                                key={section.title}
+                                title={section.title}
+                                items={section.items}
+                            />
+                        ))
+                    }
                 </CardContent>
             }
             <Divider />

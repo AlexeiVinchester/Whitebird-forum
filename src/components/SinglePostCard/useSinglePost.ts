@@ -3,7 +3,7 @@ import { useLoadData } from "../../hooks/useLoadData";
 import { loadApiPost } from "../../pages/SinglePostPage/loadApiPost.service";
 import { ICustomPost } from "../../types/post.interface";
 import { IApiUser } from "../../types/user.interface";
-import { getUserNameById } from "../../utils/logInHeplers";
+import { getUserNameById } from "../../utils/usersHeplers";
 
 export const useSinglePost = (postId: string | undefined, users: IApiUser[] | null) => {
     const {
