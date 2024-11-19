@@ -5,6 +5,7 @@ import { EditUserInfoFrom } from "../EditUserInfoForm/EditUserInfoFrom";
 import { StyledIconButton } from "../StyledIconButton/StyledIconButton";
 import EditIcon from '@mui/icons-material/Edit';
 import { UserInfoContext } from "../UserCard/useUserInfoContext";
+import { useCallback } from "react";
 
 interface IEditPostButton {
     userInfo: IApiUser;
@@ -12,10 +13,9 @@ interface IEditPostButton {
 };
 
 const EditPostButton = ({ userInfo, setUserInfo }: IEditPostButton) => {
-
     const { isOpen, open, close } = useModal();
 
-    const editUser = (user: IApiUser) => {
+    const editUser = useCallback((user: IApiUser) => {
         setUserInfo({
             ...user,
             company: { ...user.company },
@@ -24,10 +24,12 @@ const EditPostButton = ({ userInfo, setUserInfo }: IEditPostButton) => {
                 geo: { ...user.address.geo }
             }
         });
-    }
-    const handleClickEdit = () => {
+    }, [setUserInfo]);
+
+    const handleClickEdit = useCallback(() => {
         open()
-    };
+    }, [open]);
+
     return (
         <>
             <StyledIconButton

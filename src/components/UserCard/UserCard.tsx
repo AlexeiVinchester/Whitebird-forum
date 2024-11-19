@@ -17,11 +17,12 @@ interface IUserCard {
 
 const UserCard = ({ user }: IUserCard) => {
     const [userInfo, setUserInfo] = useState<IApiUser>(user);
-    console.log(userInfo)
-    const dispatch = useDispatch();
+    const structuredUserInfo = structureUserInfo(userInfo);
+
     const { pathname } = useLocation();
     const isProfilePage = pathname === '/profile';
-
+    
+    const dispatch = useDispatch();
     const handleClickLogOut = () => {
         dispatch(logOutAuthorisedUser());
     };
@@ -31,8 +32,6 @@ const UserCard = ({ user }: IUserCard) => {
     const handleClickShowFullInfo = () => {
         setShowFullInfo(!showFullInfo);
     };
-
-    const structuredUserInfo = structureUserInfo(userInfo);
 
     return (
         <Card

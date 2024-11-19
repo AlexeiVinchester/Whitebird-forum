@@ -1,73 +1,8 @@
 import { Card, CardContent, Typography, TextField, CardActions, Button } from "@mui/material";
-import { useUserInfoContext } from "../UserCard/useUserInfoContext";
-import { useCallback, useState } from "react";
-import { IApiUser } from "../../types/user.interface";
+import { useEditUser } from "./useEditUser";
 
 const EditUserInfoFrom = () => {
-    const { editUser, userInfo, close } = useUserInfoContext();
-    const [updatedUserInfo, setUpdatedUserInfo] = useState(userInfo);
-
-    const handleClickSave = () => {
-        editUser(updatedUserInfo);
-        close();
-    };
-
-    const onChangeTextFieldHandler = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setUpdatedUserInfo((prev: IApiUser) => {
-            switch (e.target.name) {
-                case 'street':
-                case 'suite':
-                case 'city':
-                case 'zipcode':
-                    return {
-                        ...prev,
-                        address: {
-                            ...prev.address,
-                            [e.target.name]: e.target.value
-                        }
-                    };
-                    break;
-                case 'lat':
-                case 'lng':
-                    return {
-                        ...prev,
-                        address: {
-                            ...prev.address,
-                            geo: {
-                                ...prev.address.geo,
-                                [e.target.name]: e.target.value
-                            }
-                        }
-
-                    }
-                    break;
-                case 'companyName':
-                    return {
-                        ...prev,
-                        company: {
-                            ...prev.company,
-                            name: e.target.value
-                        }
-                    }
-                    break;
-                case 'catchPhrase':
-                case 'bs':
-                    return {
-                        ...prev,
-                        company: {
-                            ...prev.company,
-                            [e.target.name]: e.target.value
-                        }
-                    }
-                    break;
-                default:
-                    return {
-                        ...prev,
-                        [e.target.name]: e.target.value
-                    };
-            }
-        });
-    }, []);
+    const { handleClickSave, handleChange, updatedUserInfo } = useEditUser();
 
     return (
         <Card
@@ -86,8 +21,8 @@ const EditUserInfoFrom = () => {
                         label="Enter name"
                         name="name"
                         defaultValue={updatedUserInfo.name}
-                        
-                        onChange={onChangeTextFieldHandler}
+
+                        onChange={handleChange}
                     />
                     <TextField
                         required
@@ -97,8 +32,8 @@ const EditUserInfoFrom = () => {
                         label="Enter username"
                         name="username"
                         defaultValue={updatedUserInfo.username}
-                        
-                        onChange={onChangeTextFieldHandler}
+
+                        onChange={handleChange}
                     />
                     <TextField
                         required
@@ -108,8 +43,8 @@ const EditUserInfoFrom = () => {
                         label="Enter email"
                         name="email"
                         defaultValue={updatedUserInfo.email}
-                        
-                        onChange={onChangeTextFieldHandler}
+
+                        onChange={handleChange}
                     />
                     <TextField
                         required
@@ -119,8 +54,8 @@ const EditUserInfoFrom = () => {
                         label="Enter phone"
                         name="phone"
                         defaultValue={updatedUserInfo.phone}
-                        
-                        onChange={onChangeTextFieldHandler}
+
+                        onChange={handleChange}
                     />
                     <TextField
                         required
@@ -130,8 +65,8 @@ const EditUserInfoFrom = () => {
                         label="Enter website"
                         name="website"
                         defaultValue={updatedUserInfo.website}
-                        
-                        onChange={onChangeTextFieldHandler}
+
+                        onChange={handleChange}
                     />
                     <TextField
                         required
@@ -141,8 +76,8 @@ const EditUserInfoFrom = () => {
                         label="Enter street"
                         name="street"
                         defaultValue={updatedUserInfo.address.street}
-                      
-                        onChange={onChangeTextFieldHandler}
+
+                        onChange={handleChange}
                     />
                     <TextField
                         required
@@ -152,8 +87,8 @@ const EditUserInfoFrom = () => {
                         label="Enter suite"
                         name="suite"
                         defaultValue={updatedUserInfo.address.suite}
-                        
-                        onChange={onChangeTextFieldHandler}
+
+                        onChange={handleChange}
                     />
                     <TextField
                         required
@@ -163,8 +98,8 @@ const EditUserInfoFrom = () => {
                         label="Enter city"
                         name="city"
                         defaultValue={updatedUserInfo.address.city}
-                        
-                        onChange={onChangeTextFieldHandler}
+
+                        onChange={handleChange}
                     />
                     <TextField
                         required
@@ -174,8 +109,8 @@ const EditUserInfoFrom = () => {
                         label="Enter zipcode"
                         name="zipcode"
                         defaultValue={updatedUserInfo.address.zipcode}
-                        
-                        onChange={onChangeTextFieldHandler}
+
+                        onChange={handleChange}
                     />
                     <TextField
                         required
@@ -185,8 +120,8 @@ const EditUserInfoFrom = () => {
                         label="Enter lat"
                         name="lat"
                         defaultValue={updatedUserInfo.address.geo.lat}
-                        
-                        onChange={onChangeTextFieldHandler}
+
+                        onChange={handleChange}
                     />
                     <TextField
                         required
@@ -196,8 +131,8 @@ const EditUserInfoFrom = () => {
                         label="Enter lng"
                         name="lng"
                         defaultValue={updatedUserInfo.address.geo.lng}
-                       
-                        onChange={onChangeTextFieldHandler}
+
+                        onChange={handleChange}
                     />
                     <TextField
                         required
@@ -207,8 +142,8 @@ const EditUserInfoFrom = () => {
                         label="Enter company name"
                         name="companyName"
                         defaultValue={updatedUserInfo.company.name}
-                        
-                        onChange={onChangeTextFieldHandler}
+
+                        onChange={handleChange}
                     />
                     <TextField
                         required
@@ -218,8 +153,8 @@ const EditUserInfoFrom = () => {
                         label="Enter catchPhrase"
                         name="catchPhrase"
                         defaultValue={updatedUserInfo.company.catchPhrase}
-                        
-                        onChange={onChangeTextFieldHandler}
+
+                        onChange={handleChange}
                     />
                     <TextField
                         required
@@ -229,8 +164,8 @@ const EditUserInfoFrom = () => {
                         label="Enter company bs"
                         name="bs"
                         defaultValue={updatedUserInfo.company.bs}
-                        
-                        onChange={onChangeTextFieldHandler}
+
+                        onChange={handleChange}
                     />
                 </form>
             </CardContent>
