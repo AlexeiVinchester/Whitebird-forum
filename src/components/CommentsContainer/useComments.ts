@@ -21,7 +21,10 @@ export const useComments = (postId: string | undefined) => {
                 email: currentUser.email,
                 body: body
             }
-            setComments((prev) => [...prev || [], newComment]);
+            setComments((prev) => {
+                const updatedComments = [...prev || [], newComment];
+                return updatedComments.sort((a, b) => b.id - a.id);
+            });
         }
     };
 

@@ -7,9 +7,12 @@ import { IPostContext } from "../PostsContainer/usePostsContext";
 
 export const useAddNewPost = ({ setPosts, posts, selectedUserId }: IAddNewPostButton) => {
     const { isOpen, open, close } = useModal();
-    
+
     const addNewPost = useCallback((post: ICustomPost) => {
-        setPosts((prev) => [...prev || [], post]);
+        setPosts((prev) => {
+            const updatedPosts = [...prev || [], post];
+            return updatedPosts.sort((a, b) => b.id - a.id);
+        });
     }, [setPosts]);
 
     const maxId = getMaxPotId(posts as ICustomPost[]) || 1;
@@ -29,7 +32,7 @@ export const useAddNewPost = ({ setPosts, posts, selectedUserId }: IAddNewPostBu
         addNewPost,
         handleClickAdd,
         contextData,
-        isOpen, 
+        isOpen,
         close
     };
 };
