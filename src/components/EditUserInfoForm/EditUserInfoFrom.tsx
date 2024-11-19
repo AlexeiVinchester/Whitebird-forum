@@ -32,7 +32,6 @@ const EditUserInfoFrom = () => {
                         label="Enter username"
                         name="username"
                         defaultValue={updatedUserInfo.username}
-
                         onChange={handleChange}
                     />
                     <TextField

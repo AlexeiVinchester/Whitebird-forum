@@ -4,7 +4,7 @@ import { ICustomPost } from "../../types/post.interface";
 import { usePostsContext } from "../PostsContainer/usePostsContext";
 
 export const useCreateNewPost = () => {
-    const {addNewPost, selectedUserId, lastPostId, close} = usePostsContext();
+    const { addNewPost, selectedUserId, lastPostId, close } = usePostsContext();
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const userId = useCurrentUser().id;

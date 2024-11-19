@@ -26,15 +26,11 @@ const EditPostButton = ({ userInfo, setUserInfo }: IEditPostButton) => {
         });
     }, [setUserInfo]);
 
-    const handleClickEdit = useCallback(() => {
-        open()
-    }, [open]);
-
     return (
         <>
             <StyledIconButton
                 value='Edit info'
-                onClick={handleClickEdit}
+                onClick={open}
                 clickFlag
             >
                 <EditIcon />
