@@ -1,26 +1,13 @@
-import { Card, CardHeader, Avatar, Divider, CardActions, IconButton, CardContent, Typography } from "@mui/material";
+import { Card, CardHeader, Avatar, Divider, CardActions, CardContent, Typography } from "@mui/material";
 import { ICustomUser } from "../../types/user.interface";
-import LogoutIcon from '@mui/icons-material/Logout';
-import EditIcon from '@mui/icons-material/Edit';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { logOutAuthorisedUser } from "../../features/authorisedUser/authorisedUserSlice";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { StyledIconButton } from "../StyledIconButton/StyledIconButton";
-import EmailIcon from '@mui/icons-material/Email';
-import PhoneIcon from '@mui/icons-material/Phone';
-import StreetviewIcon from '@mui/icons-material/Streetview';
-import ApartmentIcon from '@mui/icons-material/Apartment';
-import LocationCityIcon from '@mui/icons-material/LocationCity';
-import InboxIcon from '@mui/icons-material/Inbox';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import LanguageIcon from '@mui/icons-material/Language';
-import BusinessIcon from '@mui/icons-material/Business';
-import MicNoneIcon from '@mui/icons-material/MicNone';
-import HelpIcon from '@mui/icons-material/Help';
+import { EditPostButton } from "../EditPostButton/EditPostButton";
+import { iconMap } from "../../share/iconsMap";
+
 interface IUserCard {
     user: ICustomUser;
 };
@@ -38,10 +25,6 @@ const UserCard = ({ user }: IUserCard) => {
 
     const handleClickShowFullInfo = () => {
         setShowFullInfo(!showFullInfo);
-    };
-
-    const handleEdit = () => {
-
     };
 
     return (
@@ -63,18 +46,27 @@ const UserCard = ({ user }: IUserCard) => {
                     />
                 }
                 title={
-                    <h3 className="text-3xl font-bold text-blue-700">
-                        {user.name}
-                        {user.isAdmin && <AdminPanelSettingsIcon className=" text-admin-icon" />}
-                    </h3>}
-                subheader={<p className="text-sm text-gray-500">{user.username}</p>}
+                    <div className="text-blue-700">
+                        <h3 className="text-3xl font-bold  flex items-center gap-2">
+                            {user.name}
+                        </h3>
+                        <p className="text-sm">{user.username}</p>
+                    </div>}
+                subheader={
+                    <div className="text-admin-icon flex items-center">{user.isAdmin && (
+                        <>
+                            {iconMap.admin}
+                            <span className="text-lg font-medium">Admin</span>
+                        </>
+                    )}</div>
+                }
             />
             <StyledIconButton
                 onClick={handleClickShowFullInfo}
                 clickFlag={showFullInfo}
                 value={showFullInfo ? 'Hide full info' : 'Show full info'}
             >
-                {showFullInfo ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                {showFullInfo ? iconMap.hideFullInfo : iconMap.showFullInfo}
             </StyledIconButton>
 
             {showFullInfo &&
@@ -85,15 +77,15 @@ const UserCard = ({ user }: IUserCard) => {
                         </Typography>
                         <Divider className="!mb-1" />
                         <div className="flex items-center">
-                            <EmailIcon />
+                            {iconMap.email}
                             <span className="ml-2">{user.email}</span>
                         </div>
                         <div className="flex items-center">
-                            <PhoneIcon />
+                            {iconMap.phone}
                             <span className="ml-2">{user.phone}</span>
                         </div>
                         <div className="flex items-center">
-                            <LanguageIcon />
+                            {iconMap.website}
                             <span className="ml-2">{user.website}</span>
                         </div>
                     </div>
@@ -103,23 +95,23 @@ const UserCard = ({ user }: IUserCard) => {
                         </Typography>
                         <Divider className="!mb-1" />
                         <div className="flex items-center">
-                            <StreetviewIcon />
+                            {iconMap.street}
                             <span className="ml-2">{user.address.street}</span>
                         </div>
                         <div className="flex items-center">
-                            <ApartmentIcon />
+                            {iconMap.suite}
                             <span className="ml-2">{user.address.suite}</span>
                         </div>
                         <div className="flex items-center">
-                            <LocationCityIcon />
+                            {iconMap.city}
                             <span className="ml-2">{user.address.city}</span>
                         </div>
                         <div className="flex items-center">
-                            <InboxIcon />
+                            {iconMap.zipcode}
                             <span className="ml-2">{user.address.zipcode}</span>
                         </div>
                         <div className="flex items-center">
-                            <LocationOnIcon />
+                            {iconMap.geo}
                             <span className="ml-2">
                                 lat: {user.address.geo.lat}, lng: {user.address.geo.lng}
                             </span>
@@ -131,15 +123,15 @@ const UserCard = ({ user }: IUserCard) => {
                         </Typography>
                         <Divider className="!mb-1" />
                         <div className="flex items-center">
-                            <BusinessIcon />
+                            {iconMap.companyName}
                             <span className="ml-2">{user.company.name}</span>
                         </div>
                         <div className="flex items-center">
-                            <MicNoneIcon />
+                            {iconMap.companyCatchPhrase}
                             <span className="ml-2">{user.company.catchPhrase}</span>
                         </div>
                         <div className="flex items-center">
-                            <HelpIcon />
+                            {iconMap.companyBs}
                             <span className="ml-2">{user.company.bs}</span>
                         </div>
                     </div>
@@ -148,18 +140,15 @@ const UserCard = ({ user }: IUserCard) => {
             <Divider />
             <CardActions>
                 <div className="w-full flex flex-row justify-between items-center">
-                    <IconButton
-                        title='Edit'
-                        onClick={handleEdit}
-                    >
-                        <EditIcon className="text-basic-color" />
-                    </IconButton>
-                    {isProfilePage && <IconButton
-                        title='Log out'
-                        onClick={handleClickLogOut}
-                    >
-                        <LogoutIcon className="text-basic-color" />
-                    </IconButton>
+                    <EditPostButton />
+                    {isProfilePage &&
+                        <StyledIconButton
+                            value='Log out'
+                            onClick={handleClickLogOut}
+                            clickFlag
+                        >
+                            {iconMap.logOut}
+                        </StyledIconButton>
                     }
                 </div>
             </CardActions>
