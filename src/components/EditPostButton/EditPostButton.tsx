@@ -8,7 +8,7 @@ const EditPostButton = () => {
     return (
         <>
             <StyledIconButton
-                value='Edit personal info'
+                value='Edit info'
                 onClick={handleEdit}
                 clickFlag
             >
