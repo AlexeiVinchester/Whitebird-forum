@@ -1,4 +1,4 @@
 export interface IAdmin {
     userName: string;
-    email:string;
+    email: string;
 };

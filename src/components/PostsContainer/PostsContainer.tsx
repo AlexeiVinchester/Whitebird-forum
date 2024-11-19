@@ -46,7 +46,7 @@ const PostsContainer = ({ selectedUserId, apiUsers }: IPostsContainer) => {
                         />
                     </>
                     :
-                    <AbsentData title="No posts"/>
+                    <AbsentData title="No posts" />
             }
         </>
     );

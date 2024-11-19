@@ -23,7 +23,7 @@ const CommentsContainer = React.memo(({ postId }: ICommentsContainer) => {
                 <CommentsList comments={comments} />
             </>
             :
-            <AbsentData title="No comments"/>
+            <AbsentData title="No comments" />
     );
 });
 

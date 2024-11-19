@@ -52,11 +52,11 @@ export const useLogIn = (users: IApiUser[]) => {
         }
     };
 
-    return { 
-        handleChangeEmail, 
-        handleChangeUserName, 
-        handleClick, 
-        authError,  
+    return {
+        handleChangeEmail,
+        handleChangeUserName,
+        handleClick,
+        authError,
         userName,
         email: emailData.email,
         isEmailValid: emailData.isEmailValid

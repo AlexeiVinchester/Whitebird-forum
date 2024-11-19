@@ -28,9 +28,9 @@ const PostCardContainer = React.memo((props: IPostCardContainer) => {
     const handleClickOpen = useNavigateToSinglePost(post.id);
 
     const isAuthorised = useCurrentUser().isAuthorised;
-    
+
     return (
-        <PostCard 
+        <PostCard
             postAuthorName={postAuthorName}
             currentUserId={props.currentUserId}
             handleClickDelete={handleClickDeletePost}

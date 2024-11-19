@@ -18,19 +18,19 @@ export const PostsList = React.memo(({ posts, currentUserId, apiUsers, deletePos
         <div className="mt-2 flex flex-col items-center gap-8">
             {
                 posts.length ?
-                posts.map(post => (
-                    <PostCardContainer
-                        key={post.id}
-                        post={post}
-                        currentUserId={currentUserId}
-                        apiUsers={apiUsers}
-                        deletePost={deletePost}
-                        likePost={likePost}
-                        savePost={savePost}
-                    />
-                ))
-                :
-                <AbsentData title="No posts"/>
+                    posts.map(post => (
+                        <PostCardContainer
+                            key={post.id}
+                            post={post}
+                            currentUserId={currentUserId}
+                            apiUsers={apiUsers}
+                            deletePost={deletePost}
+                            likePost={likePost}
+                            savePost={savePost}
+                        />
+                    ))
+                    :
+                    <AbsentData title="No posts" />
             }
         </div>
     );

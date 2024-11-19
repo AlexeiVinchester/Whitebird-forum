@@ -6,6 +6,7 @@ import { useCurrentUser } from "../../hooks/useCurrentUser";
 
 const Header = () => {
     const currentUser = useCurrentUser();
+
     return (
         <header className="h-20 p-5 shadow-[0px_0px_4px_2px_rgba(0,0,0,0.2)] relative">
             <nav>

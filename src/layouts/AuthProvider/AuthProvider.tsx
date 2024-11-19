@@ -4,7 +4,7 @@ import { selectIsAuthorisedFlag } from "../../features/authorisedUser/authorised
 
 interface IAuthProvider {
     children: React.ReactNode;
-}
+};
 
 const AuthProvider = ({ children }: IAuthProvider) => {
     const location = useLocation();

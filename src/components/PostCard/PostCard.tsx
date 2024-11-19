@@ -33,7 +33,7 @@ const PostCard = ({
     handleClickOpen
 }: IPostCard) => {
     const { postId } = useParams();
-    
+
     return (
         <Card
             variant="outlined"

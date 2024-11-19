@@ -14,7 +14,7 @@ export interface IAddNewPostButton {
 };
 
 export const AddNewPostButton = (props: IAddNewPostButton) => {
-    const {  
+    const {
         handleClickAdd,
         contextData,
         isOpen,

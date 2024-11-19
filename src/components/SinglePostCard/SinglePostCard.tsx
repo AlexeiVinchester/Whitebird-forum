@@ -43,7 +43,7 @@ const SinglePostCard = ({ apiUsers }: ISinglePostCard) => {
                 isShowComments={isShowComments}
             />
             :
-            (<AbsentData title="Post was deleted"/>)
+            (<AbsentData title="Post was deleted" />)
     );
 };
 

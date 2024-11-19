@@ -9,7 +9,7 @@ export const usePosts = (selectedUserId: number | null) => {
     const {
         isLoading: isLoadingPosts,
         apiData: posts,
-        setApiData: setPosts, 
+        setApiData: setPosts,
         dispatch
     } = useLoadData<ICustomPost[], number | null>(loadApiPosts, selectedUserId);
 
@@ -55,7 +55,7 @@ export const usePosts = (selectedUserId: number | null) => {
         deletePost,
         likePost,
         savePost,
-        setPosts, 
+        setPosts,
         dispatch
     };
 };
