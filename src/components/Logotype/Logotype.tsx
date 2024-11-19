@@ -1,10 +1,10 @@
 import { Typography } from "@mui/material";
-import ForumIcon from '@mui/icons-material/Forum';
+import { iconMap } from "../../share/iconsMap";
 
 const Logotype = () => {
     return (
         <div className="flex items-center justify-center text-basic-color">
-            <ForumIcon sx={{ marginRight: '2px' }} />
+            {iconMap.forum}
             <Typography className="!text-[20px] !font-medium !text-[rgb(0,105,255)]">
                 Whitebird Forum
             </Typography>

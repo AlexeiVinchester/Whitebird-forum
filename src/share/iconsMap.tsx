@@ -24,6 +24,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import ErrorIcon from '@mui/icons-material/Error';
+import ForumIcon from '@mui/icons-material/Forum';
 
 export const iconMap: Record<string, React.ReactElement> = {
     email: <EmailIcon />,
@@ -51,5 +52,6 @@ export const iconMap: Record<string, React.ReactElement> = {
     allUsersPage: <GroupIcon />,
     profilePage: <AccountCircleIcon className="!text-[40px] !text-[rgb(0,105,255)]" />,
     addNewPost: <PostAddIcon fontSize="large" className="!text-basic-color" />,
-    error: <ErrorIcon />
+    error: <ErrorIcon />,
+    forum: <ForumIcon className="mr-1" />
 };
