@@ -3,7 +3,7 @@ import { IApiUser, ICustomUser } from "../../types/user.interface";
 import { logOutAuthorisedUser } from "../../features/authorisedUser/authorisedUserSlice";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { StyledIconButton } from "../StyledIconButton/StyledIconButton";
 import { EditPostButton } from "../EditPostButton/EditPostButton";
 import { iconMap } from "../../share/iconsMap";
@@ -17,7 +17,7 @@ interface IUserCard {
 
 const UserCard = ({ user }: IUserCard) => {
     const [userInfo, setUserInfo] = useState<IApiUser>(user);
-
+    console.log(userInfo)
     const dispatch = useDispatch();
     const { pathname } = useLocation();
     const isProfilePage = pathname === '/profile';
@@ -32,14 +32,14 @@ const UserCard = ({ user }: IUserCard) => {
         setShowFullInfo(!showFullInfo);
     };
 
-    const structuredUserInfo = useMemo(() => structureUserInfo(user), [user]);
+    const structuredUserInfo = structureUserInfo(userInfo);
 
     return (
         <Card
             variant="outlined"
             className="!w-[70%] !shadow-[0_5px_20px_#ABB2B9] !rounded-[22px]"
         >
-            <UserCardHeader name={user.name} userName={user.username} isAdmin={user.isAdmin} />
+            <UserCardHeader name={userInfo.name} userName={userInfo.username} isAdmin={user.isAdmin} />
             <StyledIconButton
                 onClick={handleClickShowFullInfo}
                 clickFlag={showFullInfo}
@@ -51,9 +51,9 @@ const UserCard = ({ user }: IUserCard) => {
             {showFullInfo &&
                 <CardContent>
                     {
-                        Object.values(structuredUserInfo).map(section => (
+                        Object.values(structuredUserInfo).map((section, index) => (
                             <UserInfoSection
-                                key={section.title}
+                                key={index}
                                 title={section.title}
                                 items={section.items}
                             />

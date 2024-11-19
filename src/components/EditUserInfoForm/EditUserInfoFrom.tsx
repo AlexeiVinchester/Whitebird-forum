@@ -1,15 +1,73 @@
 import { Card, CardContent, Typography, TextField, CardActions, Button } from "@mui/material";
 import { useUserInfoContext } from "../UserCard/useUserInfoContext";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { IApiUser } from "../../types/user.interface";
 
 const EditUserInfoFrom = () => {
     const { editUser, userInfo, close } = useUserInfoContext();
-    const [updatedLesson, setUpdatedLesson] = useState(userInfo);
+    const [updatedUserInfo, setUpdatedUserInfo] = useState(userInfo);
 
     const handleClickSave = () => {
-        console.log(updatedLesson);
+        editUser(updatedUserInfo);
         close();
     };
+
+    const onChangeTextFieldHandler = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setUpdatedUserInfo((prev: IApiUser) => {
+            switch (e.target.name) {
+                case 'street':
+                case 'suite':
+                case 'city':
+                case 'zipcode':
+                    return {
+                        ...prev,
+                        address: {
+                            ...prev.address,
+                            [e.target.name]: e.target.value
+                        }
+                    };
+                    break;
+                case 'lat':
+                case 'lng':
+                    return {
+                        ...prev,
+                        address: {
+                            ...prev.address,
+                            geo: {
+                                ...prev.address.geo,
+                                [e.target.name]: e.target.value
+                            }
+                        }
+
+                    }
+                    break;
+                case 'companyName':
+                    return {
+                        ...prev,
+                        company: {
+                            ...prev.company,
+                            name: e.target.value
+                        }
+                    }
+                    break;
+                case 'catchPhrase':
+                case 'bs':
+                    return {
+                        ...prev,
+                        company: {
+                            ...prev.company,
+                            [e.target.name]: e.target.value
+                        }
+                    }
+                    break;
+                default:
+                    return {
+                        ...prev,
+                        [e.target.name]: e.target.value
+                    };
+            }
+        });
+    }, []);
 
     return (
         <Card
@@ -27,6 +85,9 @@ const EditUserInfoFrom = () => {
                         variant="outlined"
                         label="Enter name"
                         name="name"
+                        defaultValue={updatedUserInfo.name}
+                        
+                        onChange={onChangeTextFieldHandler}
                     />
                     <TextField
                         required
@@ -35,6 +96,9 @@ const EditUserInfoFrom = () => {
                         variant="outlined"
                         label="Enter username"
                         name="username"
+                        defaultValue={updatedUserInfo.username}
+                        
+                        onChange={onChangeTextFieldHandler}
                     />
                     <TextField
                         required
@@ -43,6 +107,9 @@ const EditUserInfoFrom = () => {
                         variant="outlined"
                         label="Enter email"
                         name="email"
+                        defaultValue={updatedUserInfo.email}
+                        
+                        onChange={onChangeTextFieldHandler}
                     />
                     <TextField
                         required
@@ -51,6 +118,9 @@ const EditUserInfoFrom = () => {
                         variant="outlined"
                         label="Enter phone"
                         name="phone"
+                        defaultValue={updatedUserInfo.phone}
+                        
+                        onChange={onChangeTextFieldHandler}
                     />
                     <TextField
                         required
@@ -59,6 +129,9 @@ const EditUserInfoFrom = () => {
                         variant="outlined"
                         label="Enter website"
                         name="website"
+                        defaultValue={updatedUserInfo.website}
+                        
+                        onChange={onChangeTextFieldHandler}
                     />
                     <TextField
                         required
@@ -67,6 +140,9 @@ const EditUserInfoFrom = () => {
                         variant="outlined"
                         label="Enter street"
                         name="street"
+                        defaultValue={updatedUserInfo.address.street}
+                      
+                        onChange={onChangeTextFieldHandler}
                     />
                     <TextField
                         required
@@ -75,6 +151,9 @@ const EditUserInfoFrom = () => {
                         variant="outlined"
                         label="Enter suite"
                         name="suite"
+                        defaultValue={updatedUserInfo.address.suite}
+                        
+                        onChange={onChangeTextFieldHandler}
                     />
                     <TextField
                         required
@@ -83,6 +162,9 @@ const EditUserInfoFrom = () => {
                         variant="outlined"
                         label="Enter city"
                         name="city"
+                        defaultValue={updatedUserInfo.address.city}
+                        
+                        onChange={onChangeTextFieldHandler}
                     />
                     <TextField
                         required
@@ -91,6 +173,9 @@ const EditUserInfoFrom = () => {
                         variant="outlined"
                         label="Enter zipcode"
                         name="zipcode"
+                        defaultValue={updatedUserInfo.address.zipcode}
+                        
+                        onChange={onChangeTextFieldHandler}
                     />
                     <TextField
                         required
@@ -99,6 +184,9 @@ const EditUserInfoFrom = () => {
                         variant="outlined"
                         label="Enter lat"
                         name="lat"
+                        defaultValue={updatedUserInfo.address.geo.lat}
+                        
+                        onChange={onChangeTextFieldHandler}
                     />
                     <TextField
                         required
@@ -107,6 +195,9 @@ const EditUserInfoFrom = () => {
                         variant="outlined"
                         label="Enter lng"
                         name="lng"
+                        defaultValue={updatedUserInfo.address.geo.lng}
+                       
+                        onChange={onChangeTextFieldHandler}
                     />
                     <TextField
                         required
@@ -115,6 +206,9 @@ const EditUserInfoFrom = () => {
                         variant="outlined"
                         label="Enter company name"
                         name="companyName"
+                        defaultValue={updatedUserInfo.company.name}
+                        
+                        onChange={onChangeTextFieldHandler}
                     />
                     <TextField
                         required
@@ -123,6 +217,9 @@ const EditUserInfoFrom = () => {
                         variant="outlined"
                         label="Enter catchPhrase"
                         name="catchPhrase"
+                        defaultValue={updatedUserInfo.company.catchPhrase}
+                        
+                        onChange={onChangeTextFieldHandler}
                     />
                     <TextField
                         required
@@ -131,6 +228,9 @@ const EditUserInfoFrom = () => {
                         variant="outlined"
                         label="Enter company bs"
                         name="bs"
+                        defaultValue={updatedUserInfo.company.bs}
+                        
+                        onChange={onChangeTextFieldHandler}
                     />
                 </form>
             </CardContent>

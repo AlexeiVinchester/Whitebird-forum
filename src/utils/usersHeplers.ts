@@ -1,6 +1,6 @@
 import { admins } from "../config/config";
 import { iconMap } from "../share/iconsMap";
-import { IApiUser, ICustomUser } from "../types/user.interface";
+import { IApiUser } from "../types/user.interface";
 import { IUserInfo } from "../types/userInfo.interface";
 
 export const createKey = (userName: string, email: string) => `${userName}:${email}`;
@@ -26,7 +26,7 @@ export const getUserNameById = (users: IApiUser[], id: number) => {
     return usersMap.get(id) || 'Unknown user';
 };
 
-export const structureUserInfo = (user: ICustomUser): IUserInfo => ({
+export const structureUserInfo = (user: IApiUser): IUserInfo => ({
     personalContacts: {
         title: "Personal contacts",
         items: [

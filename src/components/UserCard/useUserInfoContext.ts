@@ -17,7 +17,7 @@ export const useUserInfoContext = () => {
     const dispatch = useDispatch();
 
     if (!context) {
-        dispatch(showErrorMessage(new Error('Invalid user info context!')))
+        dispatch(showErrorMessage(new Error('Invalid user info context!')));
     }
 
     return context as IUserInfoContext;

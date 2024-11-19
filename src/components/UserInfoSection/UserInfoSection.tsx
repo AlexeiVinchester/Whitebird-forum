@@ -9,9 +9,9 @@ const UserInfoSection = ({ title, items }: IInfoSection) => {
                 {title}:
             </Typography>
             <Divider className="!mb-1" />
-            {items.map(item => (
+            {items.map((item, index) => (
                 <InfoSectionItem
-                    key={item.value}
+                    key={index}
                     icon={item.icon}
                     value={item.value}
                 />
