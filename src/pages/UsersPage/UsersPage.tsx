@@ -7,7 +7,7 @@ import { loadApiUsers } from "../../services/loadApiUsers";
 
 const UsersPage = () => {
     const { isLoading, apiData: apiUsers } = useLoadData(loadApiUsers);
-    const isAdmin = useCurrentUser().isAdmin;
+    const { isAdmin } = useCurrentUser();
 
     if (!isAdmin) {
         return <AbsentData title="You are not admin" />

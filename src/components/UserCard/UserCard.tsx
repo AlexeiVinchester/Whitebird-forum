@@ -5,6 +5,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { logOutAuthorisedUser } from "../../features/authorisedUser/authorisedUserSlice";
 import { useDispatch } from "react-redux";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
+import { useLocation } from "react-router-dom";
 
 interface IUserCard {
     user: ICustomUser;
@@ -12,6 +14,12 @@ interface IUserCard {
 
 const UserCard = ({ user }: IUserCard) => {
     const dispatch = useDispatch();
+
+    const { id: currentUserId } = useCurrentUser(); 
+    const { pathname } = useLocation();
+
+    const isCurrentUserCard = user.id === currentUserId;
+    const isProfilePage = pathname === '/profile';
 
     const handleClickLogOut = () => {
         dispatch(logOutAuthorisedUser());
@@ -46,23 +54,27 @@ const UserCard = ({ user }: IUserCard) => {
                     </h3>}
                 subheader={<p className="text-sm text-gray-500">{user.username}</p>}
             />
-
             <Divider />
-
             <CardActions>
                 <div className="w-full flex flex-row justify-between items-center">
-                    <IconButton
-                        title='Edit'
-                        onClick={handleEdit}
-                    >
-                        <EditIcon className="text-basic-color" />
-                    </IconButton>
-                    <IconButton
+                    {
+                        ((isCurrentUserCard && isProfilePage) || (!isCurrentUserCard && !isProfilePage)) &&
+                        <IconButton
+                            title='Edit'
+                            onClick={handleEdit}
+                        >
+                            <EditIcon className="text-basic-color" />
+                        </IconButton>
+                    }
+
+                    {isProfilePage && <IconButton
                         title='Log out'
                         onClick={handleClickLogOut}
                     >
                         <LogoutIcon className="text-basic-color" />
                     </IconButton>
+                    }
+
                 </div>
 
             </CardActions>

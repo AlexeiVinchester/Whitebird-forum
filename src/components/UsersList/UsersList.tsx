@@ -5,7 +5,7 @@ interface IUsersList {
     users: ICustomUser[];
 };
 
-const UsersList = ({ users }: IUsersList) => {
+const UsersList = ({ users }: IUsersList) => {  
     return (
         <>
             {
