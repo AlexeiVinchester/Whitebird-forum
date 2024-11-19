@@ -1,4 +1,4 @@
 import { useSelector } from "react-redux";
-import { selectIsAuthorisedUser } from "../features/authorisedUser/authorisedUserSelectors";
+import { selectAuthorisedUser } from "../features/authorisedUser/authorisedUserSelectors";
 
-export const useCurrentUser = () => useSelector(selectIsAuthorisedUser);
+export const useCurrentUser = () => useSelector(selectAuthorisedUser);

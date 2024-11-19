@@ -1,12 +1,11 @@
-import { useSelector } from "react-redux";
-import { selectIsAuthorisedUser } from "../../features/authorisedUser/authorisedUserSelectors";
 import { loadApiPosts } from "../../pages/PostsPage/loadApiPosts.service";
 import { ICustomPost } from "../../types/post.interface";
 import { useLoadData } from "../../hooks/useLoadData";
 import { useCallback } from "react";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
 
 export const usePosts = (selectedUserId: number | null) => {
-    const currentUser = useSelector(selectIsAuthorisedUser);
+    const currentUser = useCurrentUser();
     const {
         isLoading: isLoadingPosts,
         apiData: posts,

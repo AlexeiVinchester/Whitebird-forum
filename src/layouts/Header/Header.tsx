@@ -1,12 +1,11 @@
 import { Typography, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectIsAuthorisedUser } from "../../features/authorisedUser/authorisedUserSelectors";
 import { iconMap } from "../../share/iconsMap";
 import { ROUTES } from "../../router/routes";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
 
 const Header = () => {
-    const currentUser = useSelector(selectIsAuthorisedUser);
+    const currentUser = useCurrentUser();
     return (
         <header className="h-20 p-5 shadow-[0px_0px_4px_2px_rgba(0,0,0,0.2)] relative">
             <nav>
