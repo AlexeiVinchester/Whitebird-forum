@@ -7,6 +7,7 @@ import { iconMap } from "../../share/iconsMap";
 
 interface IPostCard {
     postAuthorName: string;
+    postAuthorEmail: string;
     currentUserId: number;
     post: ICustomPost;
     isAuthorised: boolean;
@@ -21,6 +22,7 @@ interface IPostCard {
 
 const PostCard = ({
     postAuthorName,
+    postAuthorEmail,
     currentUserId,
     handleClickAllPosts,
     handleClickDelete,
@@ -48,9 +50,11 @@ const PostCard = ({
                         />
                     }
                     title={
-                        <h3 className="text-3xl font-bold text-blue-700">
+                        <h4 className="text-3xl font-bold text-blue-700">
                             {postAuthorName}
-                        </h3>}
+                            <p className="text-[16px]">{postAuthorEmail}</p>
+                        </h4>}
+                    className="!mb-0 !pb-0"
                 />
                 {
                     currentUserId === post.userId &&
@@ -65,7 +69,7 @@ const PostCard = ({
 
             <CardContent>
                 <div className="flex items-center mb-2 gap-2">
-                    <Typography variant="h4" component="p">
+                    <Typography variant="h5" component="p">
                         {post.title}
                     </Typography>
                 </div>

@@ -19,9 +19,10 @@ const SinglePostCard = ({ apiUsers }: ISinglePostCard) => {
         post,
         isLoadingPost,
         postAuthorName,
+        postAuthorEmail,
         handleClickDelete,
         handleClickSave,
-        handleClickLike
+        handleClickLike,
     } = useSinglePost(postId, apiUsers);
 
     if (isLoadingPost) {
@@ -31,6 +32,7 @@ const SinglePostCard = ({ apiUsers }: ISinglePostCard) => {
     return (
         post ?
             <PostCard
+                postAuthorEmail={postAuthorEmail}
                 postAuthorName={postAuthorName}
                 currentUserId={currentUserId}
                 handleClickDelete={handleClickDelete}

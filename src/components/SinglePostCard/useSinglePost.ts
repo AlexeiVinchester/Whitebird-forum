@@ -4,6 +4,7 @@ import { loadApiPost } from "../../pages/SinglePostPage/loadApiPost.service";
 import { ICustomPost } from "../../types/post.interface";
 import { IApiUser } from "../../types/user.interface";
 import { getUserNameById } from "../../utils/usersHeplers";
+import { IPostAuthorData } from "../../types/postAuthorData.interface";
 
 export const useSinglePost = (postId: string | undefined, users: IApiUser[] | null) => {
     const {
@@ -12,9 +13,9 @@ export const useSinglePost = (postId: string | undefined, users: IApiUser[] | nu
         setApiData: setPost
     } = useLoadData<ICustomPost, string>(loadApiPost, postId);
 
-    const postAuthorName = useMemo(() => {
+    const { postAuthorName, postAuthorEmail } = useMemo(() => {
         return getUserNameById(users as IApiUser[], post?.userId as number)
-    }, [post?.userId, users]);
+    }, [post?.userId, users]) as IPostAuthorData;
 
     const handleClickDelete = useCallback(() => setPost(null), [setPost]);
 
@@ -45,6 +46,7 @@ export const useSinglePost = (postId: string | undefined, users: IApiUser[] | nu
         postAuthorName,
         handleClickDelete,
         handleClickSave,
-        handleClickLike
+        handleClickLike,
+        postAuthorEmail
     };
 };

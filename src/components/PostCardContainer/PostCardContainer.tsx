@@ -20,9 +20,10 @@ const PostCardContainer = React.memo((props: IPostCardContainer) => {
     const {
         post,
         postAuthorName,
+        postAuthorEmail,
         handleClickDeletePost,
         handleClickLikePost,
-        handleClickSavePost
+        handleClickSavePost,
     } = usePost(props);
 
     const handleClickOpen = useNavigateToSinglePost(post.id);
@@ -31,6 +32,7 @@ const PostCardContainer = React.memo((props: IPostCardContainer) => {
 
     return (
         <PostCard
+            postAuthorEmail={postAuthorEmail}
             postAuthorName={postAuthorName}
             currentUserId={props.currentUserId}
             handleClickDelete={handleClickDeletePost}

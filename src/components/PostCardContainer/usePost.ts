@@ -2,11 +2,12 @@ import { useMemo, useCallback } from "react";
 import { IApiUser } from "../../types/user.interface";
 import { getUserNameById } from "../../utils/usersHeplers";
 import { IPostCardContainer } from "./PostCardContainer";
+import { IPostAuthorData } from "../../types/postAuthorData.interface";
 
 export const usePost = ({ post, apiUsers, deletePost, likePost, savePost }: IPostCardContainer) => {
-    const postAuthorName = useMemo(() => {
+    const { postAuthorName, postAuthorEmail } = useMemo(() => {
         return getUserNameById(apiUsers as IApiUser[], post.userId);
-    }, [apiUsers, post.userId]);
+    }, [apiUsers, post.userId]) as IPostAuthorData;
 
     const handleClickDeletePost = useCallback(() => {
         deletePost(post.id);
@@ -25,6 +26,7 @@ export const usePost = ({ post, apiUsers, deletePost, likePost, savePost }: IPos
         postAuthorName,
         handleClickDeletePost,
         handleClickLikePost,
-        handleClickSavePost
+        handleClickSavePost,
+        postAuthorEmail
     };
 };
