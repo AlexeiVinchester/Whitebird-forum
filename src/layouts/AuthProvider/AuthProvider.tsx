@@ -12,10 +12,10 @@ const AuthProvider = ({ children }: IAuthProvider) => {
     const isAuthorised = useSelector(selectIsAuthorisedFlag);
     
     if (!isAuthorised) {
-        return <Navigate to={ROUTES.LOGIN} state={{ from: location }} />
+        return <Navigate to={ROUTES.LOGIN} state={{ from: location }} />;
     }
-    
+
     return children;
 };
 
-export { AuthProvider } 
+export { AuthProvider };

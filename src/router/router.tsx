@@ -9,6 +9,7 @@ import { AbsentData } from "../components/AbsentData/AbsentData";
 import { UsersPage } from "../pages/UsersPage/UsersPage";
 import { ROUTES } from "./routes";
 import { UnAuthProvider } from "../layouts/UnAuthProvider/UnAuthProvider";
+import { AdminProvider } from "../layouts/AdminProvider/AdminProvider";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -27,7 +28,9 @@ const router = createBrowserRouter(
             } />
             <Route path={ROUTES.USERS} element={
                 <AuthProvider>
-                    <UsersPage />
+                    <AdminProvider>
+                        <UsersPage />
+                    </AdminProvider>
                 </AuthProvider>
             }
             />

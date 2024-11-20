@@ -11,7 +11,7 @@ const UnAuthProvider = ({ children }: IUnAuthProvider) => {
     const isAuthorised = useSelector(selectIsAuthorisedFlag);
 
     if (isAuthorised) {
-        return <Navigate to={ROUTES.PROFILE} />
+        return <Navigate to={ROUTES.PROFILE} />;
     }
 
     return children;
