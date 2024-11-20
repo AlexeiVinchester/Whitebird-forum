@@ -8,6 +8,7 @@ import { AuthProvider } from "../layouts/AuthProvider/AuthProvider";
 import { AbsentData } from "../components/AbsentData/AbsentData";
 import { UsersPage } from "../pages/UsersPage/UsersPage";
 import { ROUTES } from "./routes";
+import { UnAuthProvider } from "../layouts/UnAuthProvider/UnAuthProvider";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -16,13 +17,19 @@ const router = createBrowserRouter(
             <Route path={ROUTES.PROFILE} element={
                 <AuthProvider>
                     <ProfilePage />
-                </AuthProvider>} />
+                </AuthProvider>
+            } />
             <Route path={ROUTES.POST_DETAIL} element={<SinglePostPage />} />
-            <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+            <Route path={ROUTES.LOGIN} element={
+                <UnAuthProvider>
+                    <LoginPage />
+                </UnAuthProvider>
+            } />
             <Route path={ROUTES.USERS} element={
                 <AuthProvider>
                     <UsersPage />
-                </AuthProvider>}
+                </AuthProvider>
+            }
             />
             <Route path={ROUTES.NOT_FOUND} element={<AbsentData title="Not found page!" />} />
         </Route>

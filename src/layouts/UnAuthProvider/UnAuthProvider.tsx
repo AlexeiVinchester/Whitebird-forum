@@ -1,21 +1,20 @@
 import { useSelector } from "react-redux";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { selectIsAuthorisedFlag } from "../../features/authorisedUser/authorisedUserSelectors";
 import { ROUTES } from "../../router/routes";
 
-interface IAuthProvider {
+interface IUnAuthProvider {
     children: React.ReactNode;
 };
 
-const AuthProvider = ({ children }: IAuthProvider) => {
-    const location = useLocation();
+const UnAuthProvider = ({ children }: IUnAuthProvider) => {
     const isAuthorised = useSelector(selectIsAuthorisedFlag);
-    
-    if (!isAuthorised) {
-        return <Navigate to={ROUTES.LOGIN} state={{ from: location }} />
+
+    if (isAuthorised) {
+        return <Navigate to={ROUTES.PROFILE} />
     }
-    
+
     return children;
 };
 
-export { AuthProvider } 
+export { UnAuthProvider };
