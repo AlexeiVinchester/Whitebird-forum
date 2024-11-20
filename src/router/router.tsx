@@ -1,4 +1,4 @@
-import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
+import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from "react-router-dom";
 import { BasicPage } from "../pages/BasicPage/BasicPage";
 import { PostsPage } from "../pages/PostsPage/PostsPage";
 import { ProfilePage } from "../pages/ProfilePage/ProfilePage";
@@ -13,29 +13,32 @@ import { AdminProvider } from "../layouts/AdminProvider/AdminProvider";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path={ROUTES.HOME} element={<BasicPage />}>
-            <Route path={ROUTES.POSTS} element={<PostsPage />} />
-            <Route path={ROUTES.PROFILE} element={
-                <AuthProvider>
-                    <ProfilePage />
-                </AuthProvider>
-            } />
-            <Route path={ROUTES.POST_DETAIL} element={<SinglePostPage />} />
-            <Route path={ROUTES.LOGIN} element={
-                <UnAuthProvider>
-                    <LoginPage />
-                </UnAuthProvider>
-            } />
-            <Route path={ROUTES.USERS} element={
-                <AuthProvider>
-                    <AdminProvider>
-                        <UsersPage />
-                    </AdminProvider>
-                </AuthProvider>
-            }
-            />
-            <Route path={ROUTES.NOT_FOUND} element={<AbsentData title="Not found page!" />} />
-        </Route>
+        <>
+            <Route path={ROUTES.HOME} element={<Navigate to={ROUTES.POSTS} />} />
+            <Route path={ROUTES.HOME} element={<BasicPage />}>
+                <Route path={ROUTES.POSTS} element={<PostsPage />} />
+                <Route path={ROUTES.PROFILE} element={
+                    <AuthProvider>
+                        <ProfilePage />
+                    </AuthProvider>
+                } />
+                <Route path={ROUTES.POST_DETAIL} element={<SinglePostPage />} />
+                <Route path={ROUTES.LOGIN} element={
+                    <UnAuthProvider>
+                        <LoginPage />
+                    </UnAuthProvider>
+                } />
+                <Route path={ROUTES.USERS} element={
+                    <AuthProvider>
+                        <AdminProvider>
+                            <UsersPage />
+                        </AdminProvider>
+                    </AuthProvider>
+                }
+                />
+                <Route path={ROUTES.NOT_FOUND} element={<AbsentData title="Not found page!" />} />
+            </Route>
+        </>
     ),
     {
         future: {
