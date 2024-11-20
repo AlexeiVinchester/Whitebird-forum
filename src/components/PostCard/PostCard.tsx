@@ -50,10 +50,11 @@ const PostCard = ({
                         />
                     }
                     title={
-                        <h4 className="text-3xl font-bold text-blue-700">
+                        <h4 className="text-2xl font-bold text-blue-700">
                             {postAuthorName}
                             <p className="text-[16px]">{postAuthorEmail}</p>
-                        </h4>}
+                        </h4>
+                    }
                     className="!mb-0 !pb-0"
                 />
                 {
@@ -67,7 +68,7 @@ const PostCard = ({
                 }
             </div>
 
-            <CardContent>
+            <CardContent className="!mb-0 !pb-0">
                 <div className="flex items-center mb-2 gap-2">
                     <Typography variant="h5" component="p">
                         {post.title}
