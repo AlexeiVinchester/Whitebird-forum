@@ -39,7 +39,7 @@ const PostCard = ({
     return (
         <Card
             variant="outlined"
-            className="!w-[90%] !shadow-[0_5px_20px_#ABB2B9] !rounded-[22px]"
+            className="!w-[90%] !min-w-[300px] !shadow-[0_5px_20px_#ABB2B9] !rounded-[22px]"
         >
             <div className="flex justify-between relative">
                 <CardHeader

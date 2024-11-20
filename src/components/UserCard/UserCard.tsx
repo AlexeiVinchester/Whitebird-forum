@@ -23,7 +23,7 @@ const UserCard = ({ user }: IUserCard) => {
     return (
         <Card
             variant="outlined"
-            className="!w-[70%] !shadow-[0_5px_20px_#ABB2B9] !rounded-[22px]"
+            className="!w-[70%] !min-w-[350px] !shadow-[0_5px_20px_#ABB2B9] !rounded-[22px]"
         >
             <UserCardHeader name={userInfo.name} userName={userInfo.username} isAdmin={user.isAdmin} />
             <StyledIconButton

@@ -20,7 +20,7 @@ const Header = () => {
                     </li>
                     <li className="flex items-center gap-2 ml-auto">
                         {currentUser.isAuthorised && (
-                            <span className="!text-[20px] !font-medium !text-[rgb(0,105,255)]">
+                            <span className="hidden lg:inline !text-[20px] !font-medium !text-[rgb(0,105,255)]">
                                 {currentUser.name}
                             </span>
                         )}
